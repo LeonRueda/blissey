@@ -1,0 +1,17 @@
+
+.row+.row {
+  margin-top: 1rem;
+}
+
+
+.container-fluid.new-model-container {
+  width: 100%;
+  @media (min-width: 992px) {
+    margin-right: 0;
+    width: 500px;
+  }
+}
+
+.hide {
+  display: none;
+}
