@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {Row, Column} from '../grid'
 import Button from '../button'
+import Input from '../input'
 import __ from '../../i18n'
 import Select from '../select'
 
@@ -13,8 +14,8 @@ export default (props) => {
           !attribute.hide && <Row key={attribute.name}>
             <Column classes="hide"><label htmlFor={"txt-" + attribute.name}>{attribute.label}</label></Column>
             <Column >
-              {attribute.type === "string" && <input type="text" className={"np-input text-input"} id={"txt-" + attribute.name}/>}
-              {attribute.type === "autocomplete" && <Select {...attribute.params}/>}
+              {attribute.type === "string" && <Input id={"txt-" + attribute.name} placeholder={attribute.label} onKeyUp={val => updateModel({attribute: attribute.name, value: val})}/>}
+              {attribute.type === "autocomplete" && <Select {...attribute.params} onSelect={} collection={[{name: "servicio2", label: "Servicio 2", id: 3}, {name: "servicio", label: "Servicio", id: 1}, {name: "urgencias", label: "Urgencias", id: 2}]}/>}
             </Column>
           </Row>
         ))

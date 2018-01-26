@@ -2,19 +2,6 @@
 
 
 // inputs
-
-input.np-input:focus {
-  border: none;
-  border-bottom: 1px solid $base;
-  outline: none;
-}
-
-input.np-input.input-medium {
-  width: 10rem;
-  height: 1.8rem;
-  margin: 0px 1rem;
-}
-
 input.np-input {
   &.text-input {
     width: 90%;
@@ -35,4 +22,35 @@ input.np-input {
   border: none;
   color: black;
   transition: all 200ms;
+
+  &:focus {
+    border: none;
+    border-bottom: 1px solid $base;
+    outline: none;
+  }
+
+  &.input-medium {
+    width: 10rem;
+    height: 1.8rem;
+    margin: 0px 1rem;
+
+  }
+}
+
+
+
+//Select Component
+
+div.select {
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li.select-option {
+    padding: 1rem;
+    background-color: white;
+    &.selected {
+      background-color: $base50;
+    }
+  }
 }
