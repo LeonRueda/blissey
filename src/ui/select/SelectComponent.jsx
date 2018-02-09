@@ -56,7 +56,7 @@ class Select extends Component{
 
   render () {
     return <div className="select">
-      <Input onKeyUp={ ( evt ) => this.query$.next({query: evt.target.value, key: evt.key}) }/>
+      <Input placeholder={this.props.placeholder} onKeyUp={ ( evt ) => this.query$.next({query: evt.target.value, key: evt.key}) }/>
       <SelectList collection={this.state.filteredCollection} selected={this.state.selectedIndex}/>
     </div>
   }
