@@ -26,3 +26,4 @@ class Crud extends Component {
 }
 
 export default Crud;
+
