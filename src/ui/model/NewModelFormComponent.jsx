@@ -6,6 +6,8 @@ import __ from '../../i18n'
 import Select from '../select'
 import ActionBuilder from '../../redux/action-creators'
 
+const serviceCollection = [{name: "servicio3", label: "Servicio 3", id: 4}, {name: "servicio2", label: "Servicio 2", id: 3}, {name: "servicio", label: "Servicio", id: 1}, {name: "urgencias", label: "Urgencias", id: 2}]
+
 class NewModelFormComponent extends Component {
   constructor (props) {
     super(props)
@@ -23,9 +25,13 @@ class NewModelFormComponent extends Component {
                 <Column classes="hide"><label htmlFor={"txt-" + attribute.name}>{attribute.label}</label></Column>
                 <Column >
                   {attribute.type === "string" && <Input id={"txt-" + attribute.name} placeholder={attribute.label} onKeyUp={val => this.updateModel({attribute: attribute.name, value: val})}/>}
-                  {attribute.type === "autocomplete" && <Select {...attribute.params} placeholder={attribute.label} onSelect={val => {
-                    this.props.dispatch(this.updateModel({attribute: attribute.name, value: val}))
-                  }} collection={[{name: "servicio2", label: "Servicio 2", id: 3}, {name: "servicio", label: "Servicio", id: 1}, {name: "urgencias", label: "Urgencias", id: 2}]}/>}
+                  {attribute.type === "autocomplete" && <Select {...attribute.params}
+                    placeholder={attribute.label}
+                    onSelect={({collection}) => {
+                      this.props.dispatch(this.updateModel({attribute: attribute.name, value: collection}))
+                    }}
+                    collection={serviceCollection}
+                    selectedCol={this.props.newModel[attribute.name]}   />}
                 </Column>
               </Row>
             ))

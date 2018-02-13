@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Input from '../input'
 import {Subject} from 'rxjs'
 import SelectList from './SelectListComponent'
+import SelectedList from './SelectedListComponent'
 
 class Select extends Component{
   query$ = new Subject()
@@ -10,13 +11,15 @@ class Select extends Component{
     super ( props )
     this.state = {
       filteredCollection: [],
-      selectedIndex: 0
+      selectedCollection: this.props.selectedCol,
+      selectedIndex: -1,
+      query: ''
     }
     this.query$
       .filter( ({key}) => {
-        console.log(key)
         if ( key === "Enter" ) {
-          this.select()
+          if (this.state.selectedIndex > -1) this.select()
+          return false;
         } else if ( key === "ArrowUp" ) {
           this.previousItem()
           return false;
@@ -26,9 +29,7 @@ class Select extends Component{
         }
         return true;
       })
-      .filter(value => {
-        return value.query.length > 2
-      })
+      .filter(value => value.query.length > 2 )
       .map( value => value.query )
       .subscribe(value => {
         return this.filter( value )
@@ -36,7 +37,14 @@ class Select extends Component{
   }
 
   select () {
-    this.props.onSelect(this.state.filteredCollection[this.state.selectedIndex])
+    const selected = this.state.filteredCollection[this.state.selectedIndex]
+    const selectedCollection = [...this.state.selectedCollection, selected]
+    this.props.onSelect({collection: selectedCollection, val: selected})
+    this.setState({
+      selectedCollection: selectedCollection,
+      filteredCollection: [],
+      query:''
+    })
   }
 
   previousItem () {
@@ -48,15 +56,21 @@ class Select extends Component{
   }
 
   filter ( query ) {
-    this.setState( {
+    this.setState({
       filteredCollection : this.props.collection
         .filter( item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1 )
     })
   }
 
+  onkeyUp (evt) {
+    this.setState({query: evt.target.value})
+    this.query$.next({query: evt.target.value, key: evt.key})
+  }
+
   render () {
     return <div className="select">
-      <Input placeholder={this.props.placeholder} onKeyUp={ ( evt ) => this.query$.next({query: evt.target.value, key: evt.key}) }/>
+      <SelectedList collection={this.state.selectedCollection}/>
+      <Input placeholder={this.props.placeholder} value={this.state.query} handleChange={(evt) => this.onkeyUp(evt)}/>
       <SelectList collection={this.state.filteredCollection} selected={this.state.selectedIndex}/>
     </div>
   }

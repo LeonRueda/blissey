@@ -1,18 +1,19 @@
-const initialState = {building:{name: ""}};
+import Building from '../../models/building'
 
+const model = new Building()
 
 export default (state, action) => {
-  if (state === undefined) {
-    return initialState;
-  }
+  const newState = {...state}
 
-  console.log(action)
   switch(action.type) {
     case "UPDATE_NEW_BUILDING":
-      const newState = {...state}
-      newState.building[action.model.attribute] = action.model.value
-      console.log(newState)
+      newState[`new${model.name}`][action.model.attribute] = action.model.value
       return newState
-      break;
+    case `NEW_MODEL_${model.name.toUpperCase()}`:
+      newState[`new${model.name}`] = {
+        name: "",
+        services: []
+      }
+      return newState
   }
 }
