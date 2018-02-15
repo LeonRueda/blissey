@@ -3,6 +3,7 @@ import Input from '../input'
 import {Subject} from 'rxjs'
 import SelectList from './SelectListComponent'
 import SelectedList from './SelectedListComponent'
+import {uniqBy, prop} from 'ramda'
 
 class Select extends Component{
   query$ = new Subject()
@@ -37,12 +38,18 @@ class Select extends Component{
   }
 
   select () {
+    if ( this.state.selectedIndex < 0 ) return false
     const selected = this.state.filteredCollection[this.state.selectedIndex]
-    const selectedCollection = [...this.state.selectedCollection, selected]
+    const selectedCollection = uniqBy(prop('id'), [...this.state.selectedCollection, selected])
     this.props.onSelect({collection: selectedCollection, val: selected})
+    this.clean(selectedCollection)
+  }
+
+  clean (selectedCollection) {
     this.setState({
       selectedCollection: selectedCollection,
       filteredCollection: [],
+      selectedIndex: -1,
       query:''
     })
   }

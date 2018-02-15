@@ -13,6 +13,7 @@ class NewModelFormComponent extends Component {
     super(props)
     this.actionCreator = new ActionBuilder(this.props.model)
     this.updateModel = this.actionCreator.update
+    this.persistModel = this.actionCreator.persist
   }
 
   render () {
@@ -37,7 +38,7 @@ class NewModelFormComponent extends Component {
             ))
           }
           <Row classes="justify-content-end">
-            <Column classes="col-sm-6 col-md-3"><Button>{__("Save")}</Button></Column>
+            <Column classes="col-sm-6 col-md-3"><Button onClick={() => this.props.dispatch(this.persistModel())}>{__("Save")}</Button></Column>
             <Column classes="col-sm-6 col-md-3"><Button>{__("Cancel")}</Button></Column>
           </Row>
         </div>
