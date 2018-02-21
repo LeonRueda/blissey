@@ -14,7 +14,7 @@ export default class Input extends Component{
       className="np-input text-input"
       id={this.props.id}
       onChange={this.props.handleChange}
-      onKeyUp={this.props.handleChange}
+      onKeyUp={this.props.onKeyUp}
       placeholder={this.props.placeholder}
       value={this.props.value}/>
   }

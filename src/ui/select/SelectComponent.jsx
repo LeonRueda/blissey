@@ -77,7 +77,11 @@ class Select extends Component{
   render () {
     return <div className="select">
       <SelectedList collection={this.state.selectedCollection}/>
-      <Input placeholder={this.props.placeholder} value={this.state.query} handleChange={(evt) => this.onkeyUp(evt)}/>
+      <Input
+        placeholder={this.props.placeholder}
+        value={this.state.query}
+        handleChange={(evt) => this.onkeyUp(evt)}
+        onKeyUp={(evt) => this.onkeyUp(evt)}/>
       <SelectList collection={this.state.filteredCollection} selected={this.state.selectedIndex}/>
     </div>
   }

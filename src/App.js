@@ -11,6 +11,7 @@ import Routes from './routes'
           <h1 className="App-title">Welcome to React Main</h1>
             <ul>
                 <li><Link to="/building">Admin Building</Link></li>
+                <li><Link to="/log-in">Log In</Link></li>
             </ul>
         </header>
         <Routes />
