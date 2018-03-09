@@ -52,5 +52,27 @@ div.select {
     &.selected {
       background-color: $base50;
     }
+    &:hover {
+      background-color: $base50;
+    }
+  }
+  .selected {
+    margin: 0 5%;
+    .selected-option {
+      padding: 5px;
+      margin-right: 5px;
+      float: left;
+      display: inline-block;
+      background-color: #b1eef7;
+      border: 1px solid #bbb;
+      border-radius: 2px;
+      font-size: 0.75rem;
+      .delete {
+        cursor: pointer;
+        &:hover {
+          text-shadow: 1px 1px #999999;
+        }
+      }
+    }
   }
 }

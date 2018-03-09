@@ -3,7 +3,7 @@ import Input from '../input'
 import {Subject} from 'rxjs'
 import SelectList from './SelectListComponent'
 import SelectedList from './SelectedListComponent'
-import {uniqBy, prop} from 'ramda'
+import {uniqBy, prop, defaultTo, remove} from 'ramda'
 
 class Select extends Component{
   query$ = new Subject()
@@ -14,7 +14,8 @@ class Select extends Component{
       filteredCollection: [],
       selectedCollection: this.props.selectedCol,
       selectedIndex: -1,
-      query: ''
+      query: '',
+      showList: true
     }
     this.query$
       .filter( ({key}) => {
@@ -37,9 +38,11 @@ class Select extends Component{
       })
   }
 
-  select () {
-    if ( this.state.selectedIndex < 0 ) return false
-    const selected = this.state.filteredCollection[this.state.selectedIndex]
+  select ( index ) {
+    const defaultToStateIndex = defaultTo(this.state.selectedIndex)
+    const selectedIndex = defaultToStateIndex(index)
+    if ( selectedIndex <= -1 ) return false
+    const selected = this.state.filteredCollection[selectedIndex]
     const selectedCollection = uniqBy(prop('id'), [...this.state.selectedCollection, selected])
     this.props.onSelect({collection: selectedCollection, val: selected})
     this.clean(selectedCollection)
@@ -63,9 +66,11 @@ class Select extends Component{
   }
 
   filter ( query ) {
+    const filteredCollection = this.props.collection
+      .filter( item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1 )
     this.setState({
-      filteredCollection : this.props.collection
-        .filter( item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1 )
+      filteredCollection : filteredCollection,
+      showList: filteredCollection.length > 0
     })
   }
 
@@ -74,15 +79,38 @@ class Select extends Component{
     this.query$.next({query: evt.target.value, key: evt.key})
   }
 
+  hideList() {
+    //this.setState({showList: false})
+  }
+
+  indexOnHover (index) {
+    this.setState({selectedIndex: index})
+  }
+
+  unSelect (index) {
+    this.setState({selectedCollection: remove(index, 1, this.state.selectedCollection)})
+  }
+
   render () {
     return <div className="select">
-      <SelectedList collection={this.state.selectedCollection}/>
+      <SelectedList
+        collection={this.state.selectedCollection}
+        unSelect={(index) => this.unSelect(index)}/>
       <Input
+        onBlur={() => this.hideList()}
         placeholder={this.props.placeholder}
         value={this.state.query}
         handleChange={(evt) => this.onkeyUp(evt)}
         onKeyUp={(evt) => this.onkeyUp(evt)}/>
-      <SelectList collection={this.state.filteredCollection} selected={this.state.selectedIndex}/>
+        {
+          this.state.showList &&
+          <SelectList
+            collection={this.state.filteredCollection}
+            selected={this.state.selectedIndex}
+            onClick={(index) => this.select(index)}
+            mouseHover={(index) => this.indexOnHover(index)}
+          />
+        }
     </div>
   }
 }

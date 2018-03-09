@@ -10,6 +10,7 @@ export default class Input extends Component{
 
   render () {
     return <input
+      onBlur={this.props.onBlur}
       type={this.props.type || "text"}
       className="np-input text-input"
       id={this.props.id}

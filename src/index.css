@@ -45,6 +45,24 @@ div.select li.select-option {
   background-color: white; }
   div.select li.select-option.selected {
     background-color: #E0F7FA; }
+  div.select li.select-option:hover {
+    background-color: #E0F7FA; }
+
+div.select .selected {
+  margin: 0 5%; }
+  div.select .selected .selected-option {
+    padding: 5px;
+    margin-right: 5px;
+    float: left;
+    display: inline-block;
+    background-color: #b1eef7;
+    border: 1px solid #bbb;
+    border-radius: 2px;
+    font-size: 0.75rem; }
+    div.select .selected .selected-option .delete {
+      cursor: pointer; }
+      div.select .selected .selected-option .delete:hover {
+        text-shadow: 1px 1px #999999; }
 
 body {
   margin: 0;
