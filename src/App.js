@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Link } from 'react-router-dom'
 import Routes from './routes'
+import Notifications from './ui/notification'
 
  export class App extends Component {
   render() {
@@ -14,6 +15,7 @@ import Routes from './routes'
                 <li><Link to="/log-in">Log In</Link></li>
             </ul>
         </header>
+        <Notifications />
         <Routes />
       </div>
     );

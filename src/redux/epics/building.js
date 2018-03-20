@@ -1,34 +1,35 @@
 import Building from "../../models/building"
+import {Observable} from 'rxjs'
 import 'rxjs/add/operator/mapTo'
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/delay'
-import {ajax}  from 'rxjs/observable/dom/ajax'
-import {API_URL} from '../../config'
+import blisseyApi from "../../service/api/blissey-api.service"
+import notification from "../../service/notification/"
+import {prop, propOr} from 'ramda'
+
 
 const model = new Building()
+const getNewBuilding = prop(`new${model.name}`)
+const getDetails = propOr('server error', 'details')
 
 export default (action$, store) =>
   action$
     .ofType(`PERSIST_NEW_${model.name.toUpperCase()}`)
-    .mergeMap(action => {
-      return ajax({
-        url: API_URL.building,
-        crossDomain: true,
-        withCredentials: true,
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        hasContent: true,
-        body: store.getState().newbuilding
+    .mergeMap(() => blisseyApi.conf( model.name )
+      .post( getNewBuilding( store.getState() ) )
+      .map(response => {
+        notification.success(`${model.name} successfully saved`)
+        return {
+          type: `PERSIST_${model.name.toUpperCase()}_SUCCESSFULLY`,
+          response
+        }
       })
-        .map(response => {
-          console.log(response)
-          return {
-            type: `hola`,
-            response
-          }
+      .catch(error => {
+        notification.error(`${model.name} was not saved. Error: ${getDetails( error.xhr.response )}`)
+        return Observable.of({
+          type: `PERSIST_${model.name.toUpperCase()}_REJECTED`,
+          payload: error.xhr.response,
+          error: true
         })
-    })
-    .delay(1000)
-    .mapTo({
-      type: `SUCCESSFULLY_PERSIST_NEW_${model.name.toUpperCase()}`
-    })
+      })
+    )

@@ -49,7 +49,7 @@ class NewModelFormComponent extends Component {
             <Column classes="col-sm-6 col-md-3">
               <Button onClick={() => this.props.dispatch(this.persistModel())}>{__("Save")}</Button>
             </Column>
-            <Column classes="col-sm-6 col-md-3"><Button>{__("Cancel")}</Button></Column>
+            <Column classes="col-sm-6 col-md-3"><Button onClick={this.props.hideForm}>{__("Cancel")}</Button></Column>
           </Row>
         </div>
       </form>
