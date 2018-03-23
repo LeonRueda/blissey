@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import Grid from '../grid'
 import NewModelForm from '../model'
-import CrudHeader from './CrudHeaderComponent'
+import CrudHeader from './CrudHeaderContainer'
 import CrudCommands from "../../service/shortcut/crud-command.service";
 import {Subject} from "rxjs/Rx";
+import {isEmpty} from "ramda";
 
 
 class Crud extends Component {
@@ -30,18 +31,19 @@ class Crud extends Component {
     this.props.dispatch({
       type: `CREATE_NEW_MODEL_${this.props.model.name.toUpperCase()}`
     })
-    this.setState({showNewModel : true});
   }
 
   hideNewModel () {
-    this.setState({showNewModel: false})
+    this.props.dispatch({
+      type: `DELETE_NEW_MODEL_${this.props.model.name.toUpperCase()}`
+    })
   }
 
   render () {
     return (
       <div>
         <CrudHeader name={this.props.model.name} quantity={this.props.model.collection.length} showNewModel={() => this.showNewModel()} />
-        { !this.state.showNewModel ? <Grid model={this.props.model}/> : <NewModelForm model={this.props.model} dispatch={this.props.dispatch} hideForm={() => this.hideNewModel()}/> }
+        { isEmpty(this.props.newModelState) ? <Grid model={this.props.model}/> : <NewModelForm model={this.props.model} dispatch={this.props.dispatch} hideForm={() => this.hideNewModel()}/> }
       </div>
     )
   }

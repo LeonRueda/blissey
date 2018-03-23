@@ -9,6 +9,9 @@ export default (state, action) => {
     case `UPDATE_NEW_${model.name.toUpperCase()}`:
       newState[`new${model.name}`][action.model.attribute] = action.model.value
       return newState
+    case `DELETE_NEW_MODEL_${model.name.toUpperCase()}`:
+      newState[`new${model.name}`] = {}
+      return newState
     case `CREATE_NEW_MODEL_${model.name.toUpperCase()}`:
       newState[`new${model.name}`] = {
         name: "",
