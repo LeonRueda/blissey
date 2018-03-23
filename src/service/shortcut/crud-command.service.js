@@ -19,9 +19,11 @@ class CrudCommands {
   execCommand ( command ) {
     switch ( command ) {
       case '+':
-      return 'showNewModel'
+        return 'showNewModel'
+      default:
+        return ''
     }
   }
 }
 
-  export default CrudCommands
+export default CrudCommands

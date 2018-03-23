@@ -1,4 +1,3 @@
-import React from 'react'
 import Component from './CrudHeaderComponent'
 import {connect} from 'react-redux'
 import {propOr} from 'ramda'

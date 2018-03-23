@@ -1,7 +1,7 @@
 
 class NotificationService {
   constructor () {
-    message: 'hola mundo'
+    this.message = ''
   }
 
   success (message, params) {
