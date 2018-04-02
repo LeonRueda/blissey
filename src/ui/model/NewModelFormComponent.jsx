@@ -5,6 +5,7 @@ import Input from '../input'
 import __ from '../../i18n'
 import Select from '../select'
 import ActionBuilder from '../../redux/action-creators'
+import {isNil} from 'ramda'
 
 const serviceCollection = [
   {name: "servicio3", label: "Servicio 3", id: 4},
@@ -16,8 +17,20 @@ class NewModelFormComponent extends Component {
   constructor (props) {
     super(props)
     this.actionCreator = new ActionBuilder(this.props.model)
-    this.updateModel = this.actionCreator.update
+    this.updateNewModel = this.actionCreator.updateNew
     this.persistModel = this.actionCreator.persist
+    this.updateModel = this.actionCreator.update
+    this.state = {...props.newModel}
+  }
+
+  updateAttribute (newValue) {
+    this.setState({[newValue.attribute]: newValue.value})
+    return this.props.dispatch(this.updateNewModel(newValue))
+  }
+
+  saveModel () {
+    if (isNil(this.state.id)) return this.props.dispatch(this.persistModel())
+    return this.props.dispatch(this.updateModel())
   }
 
   render () {
@@ -32,13 +45,12 @@ class NewModelFormComponent extends Component {
                   {attribute.type === "string" &&
                     <Input id={"txt-" + attribute.name}
                       placeholder={attribute.label}
-                      onKeyUp={evt =>
-                        this.props.dispatch(this.updateModel({attribute: attribute.name, value: evt.target.value}))}/>}
+                      value={this.state[attribute.name]}
+                      onKeyUp={evt => this.updateAttribute({attribute: attribute.name, value: evt.target.value})}
+                      handleChange={evt => this.updateAttribute({attribute: attribute.name, value: evt.target.value})}/>}
                   {attribute.type === "autocomplete" && <Select {...attribute.params}
                     placeholder={attribute.label}
-                    onSelect={({collection}) => {
-                      this.props.dispatch(this.updateModel({attribute: attribute.name, value: collection}))
-                    }}
+                    onSelect={({collection}) => this.updateAttribute({attribute: attribute.name, value: collection})}
                     collection={serviceCollection}
                     selectedCol={this.props.newModel[attribute.name]}   />}
                 </Column>
@@ -47,7 +59,7 @@ class NewModelFormComponent extends Component {
           }
           <Row classes="justify-content-end">
             <Column classes="col-sm-6 col-md-3">
-              <Button onClick={() => this.props.dispatch(this.persistModel())}>{__("Save")}</Button>
+              <Button onClick={() => this.saveModel()}>{__("Save")}</Button>
             </Column>
             <Column classes="col-sm-6 col-md-3"><Button onClick={this.props.hideForm}>{__("Cancel")}</Button></Column>
           </Row>

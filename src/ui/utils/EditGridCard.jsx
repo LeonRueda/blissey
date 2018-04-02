@@ -1,0 +1,18 @@
+import React from 'react'
+import {connect} from 'react-redux'
+
+const EditGridCard = props => {
+  return (
+    <i className="material-icons"
+       style={{width: '2rem', cursor: 'pointer'}}
+       key={props.key}
+       onClick={() => props.dispatch({
+         type: `EDIT_${props.model.name.toUpperCase()}`,
+         model: props.value
+       })}>
+      mode_edit
+    </i>
+  )
+}
+
+export default connect()(EditGridCard)

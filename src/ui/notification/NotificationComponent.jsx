@@ -26,7 +26,7 @@ class notifications extends Component{
 
   render () {
     return (
-      <div className={`alert alert-${this.state.type}`} role="alert" style={{display: this.state.show ? "block" : "none"}}>
+      <div className={`main-app-notification alert alert-${this.state.type}`} role="alert" style={{display: this.state.show ? "block" : "none"}}>
         {this.state.message}
       </div>
     )

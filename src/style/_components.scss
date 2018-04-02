@@ -37,10 +37,33 @@ input.np-input {
   }
 }
 
-
+// Buttons Styles
+button {
+  &.np-button {
+    width: 90%;
+    height: 2rem;
+    margin: 0px 5%;
+    border: none;
+    border-radius: 2px;
+    font-family: florsans-bold;
+    box-shadow: $BS-first-level;
+    &.input-medium {
+      width: 10rem;
+      height: 2rem;
+      margin: 0px 1rem;
+    }
+  }
+  &.submit {
+    background-color: $base;
+    color: white;
+  }
+  &.new {
+    background-color: $base900;
+    color: white;
+  }
+}
 
 //Select Component
-
 div.select {
   ul {
     list-style-type: none;
@@ -75,4 +98,64 @@ div.select {
       }
     }
   }
+}
+
+//App main header
+header.app-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 600;
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: saturate($base, 5%);
+    box-shadow: $BS-first-level;
+    li {
+      float: left;
+      a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: all 1000ms;
+        &:hover {
+          background-color: $baseHover;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+div.main-app-notification {
+  margin-top: 48px;
+}
+
+
+header.crud-header {
+  background-color: #E0F7FA;
+  width: 100%;
+  height: 5rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  span.section-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
+}
+
+div.grid-header {
+  background-color: #E0F7FA;
+  .column-header {
+    font-size: 0.8em;
+    color: gray
+  }
+}
+
+header.np-crud-header:hover {
+  //height: 5rem;
 }

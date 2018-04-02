@@ -19,6 +19,28 @@ class API {
     })
   }
 
+  patch(data) {
+    return ajax({
+      url: `${API_URL[this.actualModel]}/${data.id}`,
+      crossDomain: true,
+      withCredentials: true,
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      hasContent: true,
+      body: data
+    })
+  }
+
+  get () {
+    return ajax({
+      url: API_URL[this.actualModel],
+      crossDomain: true,
+      withCredentials: true,
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'},
+    })
+  }
+
   conf (model) {
     this.actualModel = model
     return this

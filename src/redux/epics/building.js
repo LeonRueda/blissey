@@ -12,7 +12,31 @@ const model = new Building()
 const getNewBuilding = prop(`new${model.name}`)
 const getDetails = propOr('server error', 'details')
 
-export default (action$, store) =>
+const dispatchErrorAction = error => {
+  notification.error(`${model.name} was not saved. Error: ${getDetails( error.xhr.response )}`)
+  return Observable.of({
+    type: `PERSIST_${model.name.toUpperCase()}_REJECTED`,
+    payload: error.xhr.response,
+    error: true
+  })
+}
+
+export const updateBuilding = (action$, store) =>
+  action$
+    .ofType(`PERSIST_UPDATED_${model.name.toUpperCase()}`)
+    .mergeMap(() => blisseyApi.conf( model.name )
+      .patch( getNewBuilding( store.getState() ) )
+      .map(response => {
+        notification.success(`${model.name} successfully saved`)
+        return {
+          type: `PERSIST_UPDATE_${model.name.toUpperCase()}_SUCCESSFULLY`,
+          response: response.response
+        }
+      })
+      .catch(dispatchErrorAction)
+    )
+
+export const newBuilding = (action$, store) =>
   action$
     .ofType(`PERSIST_NEW_${model.name.toUpperCase()}`)
     .mergeMap(() => blisseyApi.conf( model.name )
@@ -24,12 +48,25 @@ export default (action$, store) =>
           response
         }
       })
-      .catch(error => {
-        notification.error(`${model.name} was not saved. Error: ${getDetails( error.xhr.response )}`)
-        return Observable.of({
-          type: `PERSIST_${model.name.toUpperCase()}_REJECTED`,
-          payload: error.xhr.response,
-          error: true
-        })
-      })
+      .catch(dispatchErrorAction)
     )
+
+export const fetchBuildings = (action$, store) => action$
+  .ofType(`LOAD_${ model.name.toUpperCase() }_COLLECTION`)
+  .mergeMap(() => blisseyApi.conf( model.name )
+    .get()
+    .map(response => {
+      return {
+        type: `SET_${model.name.toUpperCase()}_COLLECTION`,
+        collection: prop('response', response)
+      }
+    })
+    .catch(error => {
+      notification.error(`${model.name} was not fetched. Error: ${getDetails( error.xhr.response )}`)
+      return Observable.of({
+        type: `PERSIST_${model.name.toUpperCase()}_REJECTED`,
+        payload: error.xhr.response,
+        error: true
+      })
+    })
+  )

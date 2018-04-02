@@ -1,4 +1,5 @@
 import Building from '../../models/building'
+import {prop, propOr, propEq, findIndex} from 'ramda'
 
 const model = new Building()
 
@@ -24,12 +25,26 @@ export default (state, action) => {
       newState[model.name].collection = newState[model.name].collection || []
       return newState
     case `PERSIST_${model.name.toUpperCase()}_SUCCESSFULLY`:
-      const newModel = {...newState[`new${model.name}`], id: action.response.id}
+      const newModel = {...newState[`new${model.name}`], id: prop('id', action.response)}
       newState[model.name].collection.push(newModel)
       newState[`new${model.name}`] = {}
       return newState
     case `PERSIST_${model.name.toUpperCase()}_REJECTED`:
       // TODO @Leon higlight validation with server response!
+      return newState
+    case `SET_${model.name.toUpperCase()}_COLLECTION`:
+      newState[model.name] = newState[model.name] || {}
+      newState[model.name].collection = propOr([], 'collection', action)
+      return newState
+    case `EDIT_${model.name.toUpperCase()}`:
+      newState[`new${model.name}`] = {
+        ...action.model
+      }
+      return newState
+    case `PERSIST_UPDATE_${model.name.toUpperCase()}_SUCCESSFULLY`:
+      const index = findIndex(propEq('id', action.response.id))(newState[model.name].collection);
+      newState[model.name].collection[index] = {...newState[`new${model.name}`]}
+      newState[`new${model.name}`] = {}
       return newState
     default:
       return newState

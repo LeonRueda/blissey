@@ -1,3 +1,15 @@
+/// Layout Component First
+
+//App main section
+main {
+  font-family: florencesans, sans-serif;
+  margin-top: 48px;
+  width: 100%;
+  @media (min-width: 992px) {
+    float: left;
+    max-width: 66%;
+  }
+}
 
 .row+.row {
   margin-top: 1rem;
@@ -14,4 +26,14 @@
 
 .hide {
   display: none;
+}
+
+
+// Fonts
+
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: florencesans, sans-serif;
 }

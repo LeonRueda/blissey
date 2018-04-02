@@ -1,9 +1,22 @@
 import React from 'react'
 import {isEmpty} from "ramda";
 
+import {ButtonNew} from '../button'
+
 export default (props) => (
-  <header>
-    <h1>{props.name} - ({props.quantity})</h1>
-    {isEmpty(props.newModelState) && <button onClick={props.showNewModel}>New </button>}
+  <header className={'crud-header'}>
+    <div className="container">
+      <div className="row">
+        <div className="col-md-6">
+          <span className={'section-title'}>{props.name} - ({props.quantity})</span>
+        </div>
+        <div className="col-md-3">
+
+        </div>
+        <div className="col-md-3">
+          {isEmpty(props.newModelState) && <ButtonNew type={'medium'} classes={'pull-right'} onClick={props.showNewModel}>New </ButtonNew>}
+        </div>
+      </div>
+    </div>
   </header>
 )
