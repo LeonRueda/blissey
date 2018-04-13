@@ -141,6 +141,10 @@ header.app-header {
           background-color: #F8F8FF;
           text-decoration: none; }
 
+i.grid-action-icon {
+  width: 2rem;
+  cursor: pointer; }
+
 div.main-app-notification {
   margin-top: 48px; }
 

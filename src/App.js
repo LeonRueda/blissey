@@ -3,6 +3,7 @@ import './App.css';
 import Routes from './routes'
 import Notifications from './ui/notification'
 import Header from './ui/app-header'
+import Modal from './ui/modal'
 
  export class App extends Component {
   render() {
@@ -11,6 +12,7 @@ import Header from './ui/app-header'
         <Header />
         <Notifications />
         <Routes />
+        <Modal />
       </div>
     );
   }

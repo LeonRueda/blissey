@@ -3,8 +3,7 @@ import {connect} from 'react-redux'
 
 const EditGridCard = props => {
   return (
-    <i className="material-icons"
-       style={{width: '2rem', cursor: 'pointer'}}
+    <i className="material-icons grid-action-icon"
        key={props.key}
        onClick={() => props.dispatch({
          type: `EDIT_${props.model.name.toUpperCase()}`,
