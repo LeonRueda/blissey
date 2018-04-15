@@ -41,6 +41,16 @@ class API {
     })
   }
 
+  delete (id) {
+    return ajax({
+      url: `${API_URL[this.actualModel]}/${id}`,
+      crossDomain: true,
+      withCredentials: true,
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+    })
+  }
+
   conf (model) {
     this.actualModel = model
     return this

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Subject} from 'rxjs'
 import modalService from '../../service/modal'
 import $ from 'jquery'
+import __ from '../../i18n'
 import bootstrap from 'bootstrap'
 
 class ModalComponent extends Component{
@@ -12,19 +13,25 @@ class ModalComponent extends Component{
     this.state = {
       show: false,
       type: 'success',
-      message: ''
+      message: '',
+      actionName: __('Accept')
     }
+    this.modal = $('#general-modal')
 
     this.channel$
-      .do( message => {
-        $('#general-modal').modal('toggle')
+      .subscribe( message => {
+        this.modal = $('#general-modal')
+        this.modal.modal('toggle')
+        this.action = message.action
         this.setState({
-          ...message,
-          show: true
+          ...message
         })
       })
-      .delay(5000)
-      .subscribe(() => this.setState({show: false}))
+  }
+
+  fireAction () {
+    this.action()
+    this.modal.modal('toggle')
   }
 
   render () {
@@ -38,10 +45,10 @@ class ModalComponent extends Component{
             </button>
           </div>
           <div className="modal-body">
-            <p>Modal body text goes here.</p>
+            <p>{this.state.message}</p>
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-primary">Save changes</button>
+            <button type="button" className="btn btn-primary" onClick={() => this.fireAction()}>{this.state.actionName}</button>
             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>

@@ -4,11 +4,12 @@ class ModalService {
     this.channel$ = channel$
   }
 
-  warning (message = '', callback) {
+  warning (message = '', actionName, action) {
     this.channel$.next({
       type: 'warning',
-      message: message,
-      action: callback
+      message,
+      action,
+      actionName
     })
   }
 }

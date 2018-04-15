@@ -1,7 +1,11 @@
 import Building from '../../models/building'
-import {prop, propOr, propEq, findIndex} from 'ramda'
+import {prop, propOr, propEq, findIndex, remove} from 'ramda'
 
 const model = new Building()
+
+const removeById = (index) => {
+  return remove(findIndex(propEq('id', index)), 1)
+}
 
 export default (state, action) => {
   const newState = {...state}
@@ -45,6 +49,9 @@ export default (state, action) => {
       const index = findIndex(propEq('id', action.response.id))(newState[model.name].collection);
       newState[model.name].collection[index] = {...newState[`new${model.name}`]}
       newState[`new${model.name}`] = {}
+      return newState
+    case `DELETE_${model.name.toUpperCase()}_SUCCESSFULLY`:
+      newState[model.name].collection = removeById(action.response.id)(newState[model.name].collection)
       return newState
     default:
       return newState

@@ -5,12 +5,13 @@ import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/delay'
 import blisseyApi from "../../service/api/blissey-api.service"
 import notification from "../../service/notification/"
-import {prop, propOr} from 'ramda'
+import {prop, propOr, path} from 'ramda'
 
 
 const model = new Building()
 const getNewBuilding = prop(`new${model.name}`)
 const getDetails = propOr('server error', 'details')
+const getModelId = path(['model', 'id'])
 
 const dispatchErrorAction = error => {
   notification.error(`${model.name} was not saved. Error: ${getDetails( error.xhr.response )}`)
@@ -70,3 +71,25 @@ export const fetchBuildings = (action$, store) => action$
       })
     })
   )
+
+export const deleteBuilding = (action$, store) => action$
+  .ofType(`DELETE_${model.name.toUpperCase()}`)
+  .mergeMap(( action ) => {
+    return blisseyApi.conf( model.name )
+      .delete( getModelId(action) )
+      .map(response => {
+        notification.success(`${model.name} successfully deleted`)
+        return {
+          type: `DELETE_${model.name.toUpperCase()}_SUCCESSFULLY`,
+          response: response.response
+        }
+      })
+      .catch(error => {
+        notification.error(`${model.name} was not deleted. Error: ${getDetails( error.xhr.response )}`)
+        return Observable.of({
+          type: `DELETE_${model.name.toUpperCase()}_REJECTED`,
+          payload: error.xhr.response,
+          error: true
+        })
+      })
+  })

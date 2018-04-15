@@ -1,4 +1,4 @@
-import {newBuilding, fetchBuildings, updateBuilding} from './building'
+import {newBuilding, fetchBuildings, updateBuilding, deleteBuilding} from './building'
 
 
 import { combineEpics } from 'redux-observable';
@@ -6,5 +6,6 @@ import { combineEpics } from 'redux-observable';
 export default combineEpics(
   newBuilding,
   fetchBuildings,
-  updateBuilding
+  updateBuilding,
+  deleteBuilding
 )
