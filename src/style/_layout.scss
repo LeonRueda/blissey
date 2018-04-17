@@ -4,10 +4,20 @@
 main {
   font-family: florencesans, sans-serif;
   margin-top: 48px;
-  width: 100%;
+  width: 92%;
+  float: left;
   @media (min-width: 992px) {
-    float: left;
     max-width: 66%;
+  }
+}
+
+nav.app-navigation {
+  font-family: florencesans, sans-serif;
+  margin-top: 48px;
+  max-width: 8%;
+  float: right;
+  @media (min-width: 992px) {
+    max-width: 34%;
   }
 }
 

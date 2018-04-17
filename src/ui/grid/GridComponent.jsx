@@ -28,9 +28,10 @@ class Grid extends Component {
   }
 
   getMapColumnsFn (row) {
-    return map( attribute => <Column key={`${attribute.name}_${row.id}`} classes={attribute.hide ? 'hide' : ''}>
+    return map( attribute => {
+    return <Column key={`${attribute.name}_${row.id}`} classes={attribute.hide ? 'hide' : ''}>
       {this.formatCell(attribute.name, row[attribute.name])}
-    </Column>)
+    </Column>})
   }
 
   mapRows () {

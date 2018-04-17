@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {propOr, pathOr} from 'ramda'
 
 const mapStateToProps = (state, ownProps) => ({
-  newModelState: propOr({}, `new${ownProps.model.name}`, state),
+  newModelState: pathOr({}, [ownProps.model.name, `new${ownProps.model.name}`], state),
   collection: pathOr([], [`${ownProps.model.name}`, 'collection'], state)
 })
 

@@ -5,16 +5,24 @@ import Input from '../input'
 import __ from '../../i18n'
 import Select from '../select'
 import ActionBuilder from '../../redux/action-creators'
-import {isNil} from 'ramda'
+import {isNil, propOr} from 'ramda'
 
-const serviceCollection = [
-  {name: "servicio3", label: "Servicio 3", id: 4},
-  {name: "servicio2", label: "Servicio 2", id: 3},
-  {name: "servicio", label: "Servicio", id: 1},
-  {name: "urgencias", label: "Urgencias", id: 2}]
+const collections = {
+  service: [
+    {name: "servicio3", label: "Servicio 3", id: 4},
+    {name: "servicio2", label: "Servicio 2", id: 3},
+    {name: "servicio", label: "Servicio", id: 1},
+    {name: "urgencias", label: "Urgencias", id: 2}
+  ],
+  title: [
+    {name: "enfJefe", label: "Enfermera Jefe", id: 4},
+    {name: "servicio2", label: "Auxiliar de Enf.", id: 3}
+  ]
+}
+
 
 class NewModelFormComponent extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.actionCreator = new ActionBuilder(this.props.model)
     this.updateNewModel = this.actionCreator.updateNew
@@ -23,36 +31,46 @@ class NewModelFormComponent extends Component {
     this.state = {...props.newModel}
   }
 
-  updateAttribute (newValue) {
+  updateAttribute(newValue) {
     this.setState({[newValue.attribute]: newValue.value})
     return this.props.dispatch(this.updateNewModel(newValue))
   }
 
-  saveModel () {
+  saveModel() {
     if (isNil(this.state.id)) return this.props.dispatch(this.persistModel())
     return this.props.dispatch(this.updateModel())
   }
 
-  render () {
+  getInput(attribute) {
+    return <Input id={"txt-" + attribute.name}
+                  placeholder={attribute.label}
+                  value={this.state[attribute.name]}
+                  onKeyUp={evt => this.updateAttribute({attribute: attribute.name, value: evt.target.value})}
+                  handleChange={evt => this.updateAttribute({attribute: attribute.name, value: evt.target.value})}/>
+  }
+
+  getAutocomplete(attribute) {
+    return <Select {...attribute.params}
+                   placeholder={attribute.label}
+                   onSelect={({collection}) =>
+                     this.updateAttribute({attribute: attribute.name, value: collection})}
+                   collection={propOr([], attribute.params.base, collections)}
+                   selectedCol={this.props.newModel[attribute.name]}/>
+  }
+
+  render() {
     return (
       <form>
         <div className="container-fluid new-model-container">
           {
-            this.props.model.attributes.map( (attribute) => (
+            this.props.model.attributes.map((attribute) => (
               !attribute.hide && <Row key={attribute.name}>
-                <Column classes="hide"><label htmlFor={"txt-" + attribute.name}>{attribute.label}</label></Column>
-                <Column >
-                  {attribute.type === "string" &&
-                    <Input id={"txt-" + attribute.name}
-                      placeholder={attribute.label}
-                      value={this.state[attribute.name]}
-                      onKeyUp={evt => this.updateAttribute({attribute: attribute.name, value: evt.target.value})}
-                      handleChange={evt => this.updateAttribute({attribute: attribute.name, value: evt.target.value})}/>}
-                  {attribute.type === "autocomplete" && <Select {...attribute.params}
-                    placeholder={attribute.label}
-                    onSelect={({collection}) => this.updateAttribute({attribute: attribute.name, value: collection})}
-                    collection={serviceCollection}
-                    selectedCol={this.props.newModel[attribute.name]}   />}
+                <Column classes="hide">
+                  <label htmlFor={"txt-" + attribute.name}>{attribute.label}</label>
+                </Column>
+                <Column>
+                  {attribute.type === "string" && this.getInput(attribute)}
+                  {attribute.type === "autocomplete" && this.getAutocomplete(attribute)}
                 </Column>
               </Row>
             ))
@@ -61,7 +79,9 @@ class NewModelFormComponent extends Component {
             <Column classes="col-sm-6 col-md-3">
               <Button onClick={() => this.saveModel()}>{__("Save")}</Button>
             </Column>
-            <Column classes="col-sm-6 col-md-3"><Button onClick={this.props.hideForm}>{__("Cancel")}</Button></Column>
+            <Column classes="col-sm-6 col-md-3">
+              <Button onClick={this.props.hideForm}>{__("Cancel")}</Button>
+            </Column>
           </Row>
         </div>
       </form>

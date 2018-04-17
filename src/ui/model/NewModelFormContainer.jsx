@@ -1,10 +1,11 @@
 import Component from './NewModelFormComponent'
 import {connect} from 'react-redux'
+import {path} from 'ramda'
 
 const mapStateToProps = (state, ownProps) => {
   return {
     ...ownProps,
-    newModel: state['new' + ownProps.model.name]
+    newModel: path([ownProps.model.name, `new${ownProps.model.name}`], state)
   }
 }
 

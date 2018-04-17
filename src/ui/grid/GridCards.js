@@ -1,5 +1,6 @@
 import {pathOr} from 'ramda'
 import ServiceGridCard from '../service/ServiceGridCard'
+import TitleGridCard from '../title/TitleGridCard'
 import {EditGridCard, DeleteGridCard} from '../utils'
 
 
@@ -14,7 +15,8 @@ class GridCards {
 }
 
 const modelGridCards = {
-  service: ServiceGridCard
+  service: ServiceGridCard,
+  title: TitleGridCard
 }
 
 const actionsGridCards = {
@@ -27,6 +29,11 @@ const gridCards = {
     services: modelGridCards.service,
     edit: actionsGridCards.edit,
     delete: actionsGridCards.delete,
+  },
+  user: {
+    title: modelGridCards.title,
+    services: modelGridCards.service,
+    ...actionsGridCards
   }
 }
 

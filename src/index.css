@@ -17,11 +17,20 @@
 main {
   font-family: florencesans, sans-serif;
   margin-top: 48px;
-  width: 100%; }
+  width: 92%;
+  float: left; }
   @media (min-width: 992px) {
     main {
-      float: left;
       max-width: 66%; } }
+
+nav.app-navigation {
+  font-family: florencesans, sans-serif;
+  margin-top: 48px;
+  max-width: 8%;
+  float: right; }
+  @media (min-width: 992px) {
+    nav.app-navigation {
+      max-width: 34%; } }
 
 .row + .row {
   margin-top: 1rem; }
@@ -163,3 +172,29 @@ div.grid-header {
   div.grid-header .column-header {
     font-size: 0.8em;
     color: gray; }
+
+nav.app-navigation ul {
+  width: 100%;
+  margin: 10px 0;
+  padding: 0; }
+  nav.app-navigation ul li {
+    float: right;
+    width: 100%;
+    display: block;
+    background: #006064;
+    margin-bottom: 0.5rem;
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
+    transition: margin-bottom 0ms, width 150ms, height 150ms, box-shadow 150ms; }
+    nav.app-navigation ul li:hover {
+      box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+      width: 100.5%;
+      height: 3.2rem;
+      margin-bottom: 0.3rem; }
+    nav.app-navigation ul li a {
+      display: block;
+      width: 100%;
+      height: 3rem;
+      text-decoration: none;
+      text-align: center;
+      color: white;
+      line-height: 3em; }

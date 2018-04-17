@@ -1,3 +1,8 @@
+import {combineReducers} from 'redux'
 import building from './building'
+import user from "./user";
 
-export default building
+export default combineReducers({
+  building,
+  user
+})

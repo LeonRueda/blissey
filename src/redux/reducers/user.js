@@ -1,7 +1,7 @@
-import Building from '../../models/building'
+import User from '../../models/user'
 import generalReducer from './general-model'
 
-const model = new Building()
+const model = new User()
 
 export default (state, action) => {
   const newState = {...state}

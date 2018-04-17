@@ -4,6 +4,7 @@ import Routes from './routes'
 import Notifications from './ui/notification'
 import Header from './ui/app-header'
 import Modal from './ui/modal'
+import Sidebar from "./ui/sidebar";
 
  export class App extends Component {
   render() {
@@ -12,6 +13,7 @@ import Modal from './ui/modal'
         <Header />
         <Notifications />
         <Routes />
+        <Sidebar />
         <Modal />
       </div>
     );
