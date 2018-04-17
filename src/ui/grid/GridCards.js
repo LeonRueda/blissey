@@ -27,8 +27,10 @@ const actionsGridCards = {
 const gridCards = {
   building: {
     services: modelGridCards.service,
-    edit: actionsGridCards.edit,
-    delete: actionsGridCards.delete,
+    ...actionsGridCards,
+  },
+  service: {
+    ...actionsGridCards
   },
   user: {
     title: modelGridCards.title,
