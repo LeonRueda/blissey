@@ -9,6 +9,6 @@ export default props => <nav  className="app-navigation">
     <li><Link to="/service" >{__('Services')}</Link></li>
     <li><Link to="/user" >{__('Users')}</Link></li>
     <li><Link to="#!" >{__('Rules')}</Link></li>
-    <li><Link to="#!" >{__('Settings')}</Link></li>
+    <li><Link to="/settings" >{__('Settings')}</Link></li>
   </ul>
 </nav>

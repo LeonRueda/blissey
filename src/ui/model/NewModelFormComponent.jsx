@@ -5,7 +5,7 @@ import Input from '../input'
 import __ from '../../i18n'
 import Select from '../select'
 import ActionBuilder from '../../redux/action-creators'
-import {isNil, propOr} from 'ramda'
+import {isNil, propOr, mapObjIndexed} from 'ramda'
 
 const collections = {
   service: [
@@ -29,6 +29,9 @@ class NewModelFormComponent extends Component {
     this.persistModel = this.actionCreator.persist
     this.updateModel = this.actionCreator.update
     this.state = {...props.newModel}
+    mapObjIndexed((value, key) => {
+      this.props.dispatch(this.actionCreator.fetchCollection(key))
+    }, this.props.collections)
   }
 
   updateAttribute(newValue) {
@@ -54,7 +57,7 @@ class NewModelFormComponent extends Component {
                    placeholder={attribute.label}
                    onSelect={({collection}) =>
                      this.updateAttribute({attribute: attribute.name, value: collection})}
-                   collection={propOr([], attribute.params.base, collections)}
+                   collection={propOr([], attribute.params.base, this.props.collections)}
                    selectedCol={this.props.newModel[attribute.name]}/>
   }
 

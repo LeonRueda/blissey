@@ -7,7 +7,7 @@ export default props => !!props.collection.length && <ul>
             className={"select-option " + (index === props.selected ? "selected" : "")}
             onClick={() => props.onClick(index)}
             onMouseOver={props.mouseHover}>
-          {item.label}
+          {item.name}
         </li>
       )
     )}

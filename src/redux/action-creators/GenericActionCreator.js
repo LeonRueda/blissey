@@ -32,6 +32,12 @@ class GenericActionCreator {
       type: `LOAD_${ this.model.name.toUpperCase() }_COLLECTION`
     }
   }
+
+  fetchCollection(model) {
+    return {
+      type: `LOAD_${ model.toUpperCase() }_COLLECTION`
+    }
+  }
 }
 
 export default GenericActionCreator

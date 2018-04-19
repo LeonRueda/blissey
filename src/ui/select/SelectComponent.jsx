@@ -67,7 +67,7 @@ class Select extends Component{
 
   filter ( query ) {
     const filteredCollection = this.props.collection
-      .filter( item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1 )
+      .filter( item => item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 )
     this.setState({
       filteredCollection : filteredCollection,
       showList: filteredCollection.length > 0

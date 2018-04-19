@@ -1,11 +1,12 @@
 import Component from './NewModelFormComponent'
 import {connect} from 'react-redux'
-import {path} from 'ramda'
+import {path, mapObjIndexed, propOr} from 'ramda'
 
 const mapStateToProps = (state, ownProps) => {
   return {
     ...ownProps,
-    newModel: path([ownProps.model.name, `new${ownProps.model.name}`], state)
+    newModel: path([ownProps.model.name, `new${ownProps.model.name}`], state),
+    collections: mapObjIndexed(propOr([], 'collection'), state)
   }
 }
 

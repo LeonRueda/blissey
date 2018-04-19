@@ -32,6 +32,9 @@ const gridCards = {
   service: {
     ...actionsGridCards
   },
+  title: {
+    ...actionsGridCards
+  },
   user: {
     title: modelGridCards.title,
     services: modelGridCards.service,

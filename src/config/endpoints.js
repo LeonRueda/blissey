@@ -4,5 +4,6 @@ export const API_URL = {
   root: root,
   building: `${root}/building`,
   service: `${root}/service`,
+  title: `${root}/title`,
   user: `${root}/user`
 }
