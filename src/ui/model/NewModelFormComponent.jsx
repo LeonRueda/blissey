@@ -3,7 +3,7 @@ import {Row, Column} from '../grid'
 import Button from '../button'
 import Input from '../input'
 import __ from '../../i18n'
-import Select from '../select'
+import MultiSelect, {Select} from '../select'
 import ActionBuilder from '../../redux/action-creators'
 import {isNil, propOr, mapObjIndexed} from 'ramda'
 
@@ -55,6 +55,15 @@ class NewModelFormComponent extends Component {
   getAutocomplete(attribute) {
     return <Select {...attribute.params}
                    placeholder={attribute.label}
+                   onSelect={({val}) =>
+                     this.updateAttribute({attribute: attribute.name, value: val})}
+                   collection={propOr([], attribute.params.base, this.props.collections)}
+                   selected={this.props.newModel[attribute.name]}/>
+  }
+
+  getMultiselect(attribute) {
+    return <MultiSelect {...attribute.params}
+                   placeholder={attribute.label}
                    onSelect={({collection}) =>
                      this.updateAttribute({attribute: attribute.name, value: collection})}
                    collection={propOr([], attribute.params.base, this.props.collections)}
@@ -73,7 +82,9 @@ class NewModelFormComponent extends Component {
                 </Column>
                 <Column>
                   {attribute.type === "string" && this.getInput(attribute)}
+                  {attribute.type === "number" && this.getInput(attribute)}
                   {attribute.type === "autocomplete" && this.getAutocomplete(attribute)}
+                  {attribute.type === "multiselect" && this.getMultiselect(attribute)}
                 </Column>
               </Row>
             ))

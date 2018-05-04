@@ -2,7 +2,7 @@ import isNil from "ramda/es/isNil";
 
 export default class GeneralModel {
   defaultByType (attribute) {
-    return attribute.type === 'string' ? '' : attribute.type === 'autocomplete' ? [] : true
+    return attribute.type === 'string' ? '' : attribute.type === 'autocomplete' ? {} : attribute.type === 'multiselect' ? [] : true
   }
 
   getDefaultModel () {

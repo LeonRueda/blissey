@@ -5,5 +5,8 @@ export const API_URL = {
   building: `${root}/building`,
   service: `${root}/service`,
   title: `${root}/title`,
-  user: `${root}/user`
+  user: `${root}/user`,
+  planner: `${root}/planner`,
+  shift: `${root}/shift`,
+  shiftType: `${root}/shiftType`
 }

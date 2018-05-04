@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import GridCards from './GridCards'
-import {map} from 'ramda'
+import {map, pathOr} from 'ramda'
+
+const isDetailGrid = pathOr(false, ['gridProperties', 'detail'])
+const isActionableGrid = pathOr(true, ['gridProperties', 'actions'])
 
 const getActionItems = (model) => {
   return [
@@ -35,7 +38,10 @@ class Grid extends Component {
   }
 
   mapRows () {
-    return map( item => <Row key={item.id}>{this.generateColumns(item)}{this.getActionsColumn(item)}</Row>)
+    const GridRow = isDetailGrid(this.props.model) ? witDetails(Row) : Row
+    return map( item => <GridRow key={item.id}>
+      {this.generateColumns(item)}{isActionableGrid(this.props.model) ? this.getActionsColumn(item) : ''}
+      </GridRow>)
   }
 
   generateColumns (row) {
@@ -61,7 +67,8 @@ class Grid extends Component {
   }
 
   generateGridHeader () {
-    return <GridHeader>{this.generateColumnHeaders()}{this.getActionsColumnHeader()}</GridHeader>
+    const GridHeaderRow = isDetailGrid(this.props.model) ? witDetailsHeader(GridHeader) : GridHeader
+    return <GridHeaderRow>{this.generateColumnHeaders()}{isActionableGrid(this.props.model) ? this.getActionsColumnHeader() : ''}</GridHeaderRow>
   }
 
   render () {
@@ -76,3 +83,15 @@ export const Row = props => <div className={`row ${ props.classes || '' }`}>{pro
 export const Column = props => <div className={`col ${ props.classes || ''}`}>{props.children}</div>
 
 export const GridHeader = props => <div  className={`row grid-header ${ props.classes || '' }`}>{props.children}</div>
+
+const witDetails = (RowComponent) => props => <RowComponent><ShowDetails />{props.children}</RowComponent>
+
+const witDetailsHeader = (RowComponent) => props => <RowComponent><Column>-</Column>{props.children}</RowComponent>
+
+const ShowDetails = props => <Column>
+  <i className="material-icons grid-action-icon"
+     key={props.key}
+     onClick={() => props.onClick()}>
+    keyboard_arrow_down
+  </i>
+</Column>

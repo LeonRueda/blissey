@@ -1,1 +1,2 @@
-export {default} from './SelectComponent'
+export {default} from './MultiSelectComponent'
+export {default as Select} from './SelectComponent'

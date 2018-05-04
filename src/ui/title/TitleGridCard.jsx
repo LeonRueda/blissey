@@ -1,6 +1,5 @@
-import React, {Component} from 'react'
+import React from 'react'
 
 export default props => {
-  const [title] = props.value
-  return <span>{title.label}</span>
+  return <span>{props.value.name}</span>
 }

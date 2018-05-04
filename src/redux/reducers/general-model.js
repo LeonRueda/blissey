@@ -20,9 +20,7 @@ export default (newState, action, model) => {
       newState.collection = newState.collection || []
       return newState
     case `PERSIST_${model.name.toUpperCase()}_SUCCESSFULLY`:
-      console.log(action)
       const newModel = {...prop(`new${model.name}`, newState), id: prop('id', action.response)}
-      console.log(newModel)
       newState.collection.push(newModel)
       newState[`new${model.name}`] = {}
       return newState

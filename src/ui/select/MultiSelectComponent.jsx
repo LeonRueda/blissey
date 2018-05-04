@@ -2,17 +2,17 @@ import React, {Component} from 'react'
 import Input from '../input'
 import {Subject} from 'rxjs'
 import SelectList from './SelectListComponent'
-import SelectedItem from './SelectedItemComponent'
-import {uniqBy, prop, defaultTo, remove} from 'ramda'
+import SelectedList from './SelectedListComponent'
+import {uniqBy, prop, defaultTo, remove, filter} from 'ramda'
 
-class Select extends Component{
+class MultiSelect extends Component{
   query$ = new Subject()
 
   constructor ( props ) {
     super ( props )
     this.state = {
-      selected: props.selected,
       filteredCollection: [],
+      selectedCollection: this.props.selectedCol,
       selectedIndex: -1,
       query: '',
       showList: true
@@ -43,14 +43,14 @@ class Select extends Component{
     const selectedIndex = defaultToStateIndex(index)
     if ( selectedIndex <= -1 ) return false
     const selected = this.state.filteredCollection[selectedIndex]
-
-    this.props.onSelect({val: selected})
-    this.clean(selected)
+    const selectedCollection = uniqBy(prop('id'), [...this.state.selectedCollection, selected])
+    this.props.onSelect({collection: selectedCollection, val: selected})
+    this.clean(selectedCollection)
   }
 
-  clean (selected) {
+  clean (selectedCollection) {
     this.setState({
-      selected,
+      selectedCollection: selectedCollection,
       filteredCollection: [],
       selectedIndex: -1,
       query:''
@@ -66,8 +66,7 @@ class Select extends Component{
   }
 
   filter ( query ) {
-    const filteredCollection = this.props.collection
-      .filter( item => item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 )
+    const filteredCollection = filter( item => item.name.toLowerCase().indexOf(query.toLowerCase()) > -1, this.props.collection )
     this.setState({
       filteredCollection : filteredCollection,
       showList: filteredCollection.length > 0
@@ -93,8 +92,8 @@ class Select extends Component{
 
   render () {
     return <div className="select">
-      <SelectedItem
-        selected={this.state.selected}
+      <SelectedList
+        collection={this.state.selectedCollection}
         unSelect={(index) => this.unSelect(index)}/>
       <Input
         onBlur={() => this.hideList()}
@@ -102,17 +101,17 @@ class Select extends Component{
         value={this.state.query}
         handleChange={(evt) => this.onkeyUp(evt)}
         onKeyUp={(evt) => this.onkeyUp(evt)}/>
-      {
-        this.state.showList &&
-        <SelectList
-          collection={this.state.filteredCollection}
-          selected={this.state.selectedIndex}
-          onClick={(index) => this.select(index)}
-          mouseHover={(index) => this.indexOnHover(index)}
-        />
-      }
+        {
+          this.state.showList &&
+          <SelectList
+            collection={this.state.filteredCollection}
+            selected={this.state.selectedIndex}
+            onClick={(index) => this.select(index)}
+            mouseHover={(index) => this.indexOnHover(index)}
+          />
+        }
     </div>
   }
 }
 
-export default Select
+export default MultiSelect

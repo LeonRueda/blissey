@@ -1,6 +1,8 @@
 import {pathOr} from 'ramda'
 import ServiceGridCard from '../service/ServiceGridCard'
 import TitleGridCard from '../title/TitleGridCard'
+import ShiftTypeGridCard from '../shiftType/ShiftTypeGridCard'
+import ShiftGridCard from '../shift/ShiftGridCard'
 import {EditGridCard, DeleteGridCard} from '../utils'
 
 
@@ -16,7 +18,9 @@ class GridCards {
 
 const modelGridCards = {
   service: ServiceGridCard,
-  title: TitleGridCard
+  title: TitleGridCard,
+  shift: ShiftGridCard,
+  shiftType: ShiftTypeGridCard
 }
 
 const actionsGridCards = {
@@ -35,9 +39,24 @@ const gridCards = {
   title: {
     ...actionsGridCards
   },
+  planner: {
+    ...actionsGridCards
+  },
+  shift: {
+    shiftType: modelGridCards.shiftType,
+    service: modelGridCards.service,
+    ...actionsGridCards
+  },
+  shiftType: {
+    ...actionsGridCards
+  },
   user: {
     title: modelGridCards.title,
     services: modelGridCards.service,
+    ...actionsGridCards
+  },
+  assignShiftbyService: {
+    shifts: modelGridCards.shift,
     ...actionsGridCards
   }
 }
