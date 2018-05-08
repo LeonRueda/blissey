@@ -8,5 +8,6 @@ export const API_URL = {
   user: `${root}/user`,
   planner: `${root}/planner`,
   shift: `${root}/shift`,
-  shiftType: `${root}/shiftType`
+  shiftType: `${root}/shiftType`,
+  shiftAssignment: `${root}/shiftAssignment`
 }

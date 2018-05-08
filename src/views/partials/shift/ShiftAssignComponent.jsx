@@ -1,34 +1,34 @@
 import React, {Component} from 'react'
 import {AssignShiftbyService} from '../../../models'
 import Grid from "../../../ui/grid/GridComponent";
-import {map, groupBy, filter, path} from 'ramda'
+import AssignShiftToServiceComponent from './AssignShiftToServiceContainer'
+import {map, propEq, find, values, propOr, defaultTo} from 'ramda'
 
 
 
 class ShiftAssignComponent extends Component{
-  constructor (props) {
-    super(props)
-
-
-  }
 
   componentWillMount() {
-    this.props.dispatch({type: 'LOAD_SHIFT_COLLECTION'})
+    this.props.dispatch({type: 'LOAD_SHIFTASSIGNMENT_COLLECTION'})
     this.props.dispatch({type: 'LOAD_SERVICE_COLLECTION'})
   }
 
   getCollection () {
-    console.log(this.props.services, this.props.shifts)
-    const collection =  map(service => ({
+    const shiftAssignment = (service) => defaultTo(
+      {},
+      find(propEq('serviceId', `${service.id}`), this.props.shiftsAssignments)
+    )
+    return map(service => ({
+      id: service.id,
       serviceName: service.name,
-      shifts: groupBy(path(['shiftType', 'name']), filter(shift => shift.service.name === service.name, this.props.shifts))
+      serviceId: service.id,
+      shifts: values(propOr([], 'assignment', shiftAssignment(service)))
     }), this.props.services)
-    console.log(collection)
-    return collection
   }
 
   render () {
-    return !!this.getCollection().length && <Grid collection={this.getCollection()} model={new AssignShiftbyService()}/>
+    return !!this.getCollection().length &&
+      <Grid collection={this.getCollection()} model={new AssignShiftbyService()} detailComponent={AssignShiftToServiceComponent}/>
   }
 }
 

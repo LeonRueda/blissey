@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import GridCards from './GridCards'
-import {map, pathOr} from 'ramda'
+import {indexOf, insert, isNil, map, path, pathOr} from 'ramda'
 
 const isDetailGrid = pathOr(false, ['gridProperties', 'detail'])
 const isActionableGrid = pathOr(true, ['gridProperties', 'actions'])
+const showDetail = pathOr(false, ['detail', 'show'])
 
 const getActionItems = (model) => {
   return [
@@ -16,7 +17,7 @@ const getActionItems = (model) => {
 class Grid extends Component {
   formatCell (attributeName, value) {
     const Formatter = GridCards.getComponent(this.props.model.name, attributeName)
-    if (Formatter) return <Formatter model={this.props.model} value={value}/>
+    if (Formatter) return <Formatter model={this.props.model} value={value} key={`${attributeName} - ${value.id}`} />
     return value
   }
 
@@ -39,9 +40,20 @@ class Grid extends Component {
 
   mapRows () {
     const GridRow = isDetailGrid(this.props.model) ? witDetails(Row) : Row
-    return map( item => <GridRow key={item.id}>
+    return map( item => <GridRow key={item.id}
+                                 onDetail={() => this.onDetail(item, indexOf(item, this.props.collection))}
+                                 offDetail={() => this.offDetail()}>
       {this.generateColumns(item)}{isActionableGrid(this.props.model) ? this.getActionsColumn(item) : ''}
       </GridRow>)
+  }
+
+  onDetail (model, index) {
+    if ( showDetail(this.state) ) return this.setState({detail: {show: false, index: null, model: null}})
+    this.setState({detail: {show: true, index, model}})
+  }
+
+  offDetail () {
+    this.setState({detail: {index: null, model: null}})
   }
 
   generateColumns (row) {
@@ -49,7 +61,25 @@ class Grid extends Component {
   }
 
   generateRows () {
-    return this.mapRows()(this.props.collection)
+    const rows = this.mapRows()(this.props.collection)
+    return  isDetailGrid(this.props.model) ? this.getDetailedRows(rows) : rows
+  }
+
+  getDetailedRows(rows) {
+    const Detail = this.props.detailComponent
+    return isNil(this.getDetailIndex()) ? rows : insert(
+      this.getDetailIndex() + 1,
+      <Detail model={this.getDetailModel()} />,
+      rows
+    )
+  }
+
+  getDetailIndex () {
+    return path(['detail', 'index'], this.state)
+  }
+
+  getDetailModel () {
+    return path(['detail', 'model'], this.state)
   }
 
   getActionsColumnHeader () {
@@ -72,7 +102,7 @@ class Grid extends Component {
   }
 
   render () {
-    return <div>{this.generateGridHeader()}{this.generateRows()}</div>
+    return <div className='grid'>{this.generateGridHeader()}{this.generateRows()}</div>
   }
 }
 
@@ -84,14 +114,38 @@ export const Column = props => <div className={`col ${ props.classes || ''}`}>{p
 
 export const GridHeader = props => <div  className={`row grid-header ${ props.classes || '' }`}>{props.children}</div>
 
-const witDetails = (RowComponent) => props => <RowComponent><ShowDetails />{props.children}</RowComponent>
+const witDetails = (RowComponent) => props => <RowComponent><ShowDetailsColumn onDetail={props.onDetail}/>{props.children}</RowComponent>
 
 const witDetailsHeader = (RowComponent) => props => <RowComponent><Column>-</Column>{props.children}</RowComponent>
 
-const ShowDetails = props => <Column>
-  <i className="material-icons grid-action-icon"
-     key={props.key}
-     onClick={() => props.onClick()}>
-    keyboard_arrow_down
-  </i>
-</Column>
+class ShowDetailsColumn extends Component{
+  constructor (props) {
+    super(props)
+    this.state = {show: false}
+  }
+
+  toggle () {
+    this.setState({show: !this.state.show})
+  }
+
+  render () {
+    return <Column>
+      {!this.state.show && <i className="material-icons grid-action-icon"
+         key={this.props.key}
+         onClick={() => {
+           this.toggle()
+           return this.props.onDetail()
+         }}>
+        keyboard_arrow_down
+      </i>}
+      {this.state.show && <i className="material-icons grid-action-icon"
+                              key={this.props.key}
+                              onClick={() => {
+                                this.toggle()
+                                this.props.offDetail()
+                              }}>
+        keyboard_arrow_up
+      </i>}
+    </Column>
+  }
+}

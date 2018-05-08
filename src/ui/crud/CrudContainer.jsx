@@ -1,6 +1,6 @@
 import Component from './CrudComponent'
 import {connect} from 'react-redux'
-import {propOr, pathOr} from 'ramda'
+import {pathOr} from 'ramda'
 
 const mapStateToProps = (state, ownProps) => ({
   newModelState: pathOr({}, [ownProps.model.name, `new${ownProps.model.name}`], state),

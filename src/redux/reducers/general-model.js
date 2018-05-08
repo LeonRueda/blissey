@@ -1,4 +1,4 @@
-import {findIndex, prop, propEq, propOr, remove, path} from "ramda";
+import {findIndex, prop, propEq, propOr, remove} from "ramda";
 
 
 const removeById = (index, collection) => remove(findIndex(propEq('id', index), collection), 1, collection)

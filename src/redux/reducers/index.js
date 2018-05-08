@@ -5,6 +5,7 @@ import title from './title'
 import user from "./user"
 import shiftType from "./shiftType"
 import shift from "./shift"
+import shiftAssignment from "./shiftAssignment"
 import planner from "./planner"
 
 export default combineReducers({
@@ -14,5 +15,6 @@ export default combineReducers({
   user,
   shift,
   shiftType,
+  shiftAssignment,
   planner
 })

@@ -5,10 +5,14 @@ import {newUser, fetchUsers, updateUser, deleteUser} from './user'
 import {newPlanner, fetchPlanners, updatePlanner, deletePlanner} from './planner'
 import {newShiftType, fetchShiftTypes, updateShiftType, deleteShiftType} from './shiftType'
 import {newShift, fetchShifts, updateShift, deleteShift} from './shift'
+import {saveShiftAssignment, fetchShiftsAssignment} from './shiftAssignment'
 
 import { combineEpics } from 'redux-observable';
 
 export default combineEpics(
+  fetchShiftsAssignment,
+  saveShiftAssignment,
+
   newShift,
   fetchShifts,
   updateShift,

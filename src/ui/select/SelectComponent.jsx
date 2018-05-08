@@ -3,7 +3,7 @@ import Input from '../input'
 import {Subject} from 'rxjs'
 import SelectList from './SelectListComponent'
 import SelectedItem from './SelectedItemComponent'
-import {uniqBy, prop, defaultTo, remove} from 'ramda'
+import {defaultTo, remove} from 'ramda'
 
 class Select extends Component{
   query$ = new Subject()

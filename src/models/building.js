@@ -4,7 +4,7 @@ class Building extends GeneralModel{
   attributes = [
     {name: "id", hide: true},
     {name: "name", label: "Name", type: "string"},
-    {name: "services", label: "Services", type: "autocomplete", params: {base: "service"}}
+    {name: "services", label: "Services", type: "multiselect", params: {base: "service"}}
   ];
 
   constructor () {

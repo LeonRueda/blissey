@@ -7,20 +7,6 @@ import MultiSelect, {Select} from '../select'
 import ActionBuilder from '../../redux/action-creators'
 import {isNil, propOr, mapObjIndexed} from 'ramda'
 
-const collections = {
-  service: [
-    {name: "servicio3", label: "Servicio 3", id: 4},
-    {name: "servicio2", label: "Servicio 2", id: 3},
-    {name: "servicio", label: "Servicio", id: 1},
-    {name: "urgencias", label: "Urgencias", id: 2}
-  ],
-  title: [
-    {name: "enfJefe", label: "Enfermera Jefe", id: 4},
-    {name: "servicio2", label: "Auxiliar de Enf.", id: 3}
-  ]
-}
-
-
 class NewModelFormComponent extends Component {
   constructor(props) {
     super(props)

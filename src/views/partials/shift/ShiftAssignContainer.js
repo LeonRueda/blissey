@@ -4,7 +4,7 @@ import {pathOr} from 'ramda'
 
 const mapStateToProps = (state, ownProps) => ({
   services: pathOr([], [`service`, 'collection'], state),
-  shifts: pathOr([], ['shift', 'collection'], state)
+  shiftsAssignments: pathOr([], ['shiftAssignment', 'collection'], state)
 })
 
 export default connect(mapStateToProps)(Component)
