@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Column, Row} from "../../../ui/grid"
 import Input from "../../../ui/input/StandarInputComponent"
-import {map, path} from "ramda";
+import {find, lensPath, map, path, prop, propEq, view} from "ramda";
 import {DaysOfTheWeek} from "../../../constants";
 
 const serviceId = path(['model', 'serviceId'])
@@ -25,6 +25,10 @@ class AssignShiftToServiceComponent extends Component{
     })
   }
 
+  getAssignment () {
+    return prop('assignment', find(propEq('serviceId', `${this.props.model.serviceId}`), this.props.shiftsAssignments))
+  }
+
   render () {
     return <Row>
       <Column classes='text-right'>
@@ -32,13 +36,19 @@ class AssignShiftToServiceComponent extends Component{
         <Row><Column>Día</Column></Row>
         <Row><Column>Noche</Column></Row>
       </Column>
-      {map( day => <Column key={day.name}>
-        <Row><Column><span>{day.name}</span></Column></Row>
-        <Row><Column><Input handleChange={(evt) => this.saveModel(day.name, 'day', evt.target.value)}/></Column></Row>
-        <Row><Column><Input handleChange={(evt) => this.saveModel(day.name, 'night', evt.target.value)}/></Column></Row>
-      </Column>, DaysOfTheWeek)}
+      {map( day => {
+        const assignment = this.getAssignment()
+        const assignmentDayLens = lensPath([day.name, 'day'])
+        const assignmentNightLens = lensPath([day.name, 'night'])
+        return <Column key={day.name}>
+          <Row><Column><span>{day.name}</span></Column></Row>
+          <Row><Column><Input value={view(assignmentDayLens, assignment)} handleChange={(evt) => this.saveModel(day.name, 'day', evt.target.value)}/></Column></Row>
+          <Row><Column><Input value={view(assignmentNightLens, assignment)} handleChange={(evt) => this.saveModel(day.name, 'night', evt.target.value)}/></Column></Row>
+        </Column>}, DaysOfTheWeek)}
     </Row>
   }
 }
 
 export default AssignShiftToServiceComponent
+
+

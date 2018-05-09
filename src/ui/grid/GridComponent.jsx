@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import GridCards from './GridCards'
-import {indexOf, insert, isNil, map, path, pathOr} from 'ramda'
+import {addIndex, indexOf, insert, isNil, map, path, pathOr} from 'ramda'
 
 const isDetailGrid = pathOr(false, ['gridProperties', 'detail'])
 const isActionableGrid = pathOr(true, ['gridProperties', 'actions'])
@@ -40,9 +40,11 @@ class Grid extends Component {
 
   mapRows () {
     const GridRow = isDetailGrid(this.props.model) ? witDetails(Row) : Row
-    return map( item => <GridRow key={item.id}
+    const mapIndexed = addIndex(map);
+    return mapIndexed( (item, index)=> <GridRow key={item.id}
                                  onDetail={() => this.onDetail(item, indexOf(item, this.props.collection))}
-                                 offDetail={() => this.offDetail()}>
+                                 offDetail={() => this.offDetail()}
+                                 show={pathOr(-1, ['detail', 'index'], this.state) === index}>
       {this.generateColumns(item)}{isActionableGrid(this.props.model) ? this.getActionsColumn(item) : ''}
       </GridRow>)
   }
@@ -69,7 +71,7 @@ class Grid extends Component {
     const Detail = this.props.detailComponent
     return isNil(this.getDetailIndex()) ? rows : insert(
       this.getDetailIndex() + 1,
-      <Detail model={this.getDetailModel()} />,
+      <Detail model={this.getDetailModel()} key='detail' />,
       rows
     )
   }
@@ -114,36 +116,21 @@ export const Column = props => <div className={`col ${ props.classes || ''}`}>{p
 
 export const GridHeader = props => <div  className={`row grid-header ${ props.classes || '' }`}>{props.children}</div>
 
-const witDetails = (RowComponent) => props => <RowComponent><ShowDetailsColumn onDetail={props.onDetail}/>{props.children}</RowComponent>
+const witDetails = (RowComponent) => props => <RowComponent {...props}><ShowDetailsColumn {...props}/>{props.children}</RowComponent>
 
 const witDetailsHeader = (RowComponent) => props => <RowComponent><Column>-</Column>{props.children}</RowComponent>
 
 class ShowDetailsColumn extends Component{
-  constructor (props) {
-    super(props)
-    this.state = {show: false}
-  }
-
-  toggle () {
-    this.setState({show: !this.state.show})
-  }
-
-  render () {
+  render() {
     return <Column>
-      {!this.state.show && <i className="material-icons grid-action-icon"
-         key={this.props.key}
-         onClick={() => {
-           this.toggle()
-           return this.props.onDetail()
-         }}>
+      {!this.props.show && <i className="material-icons grid-action-icon"
+                              key={this.props.key}
+                              onClick={() => this.props.onDetail()}>
         keyboard_arrow_down
       </i>}
-      {this.state.show && <i className="material-icons grid-action-icon"
-                              key={this.props.key}
-                              onClick={() => {
-                                this.toggle()
-                                this.props.offDetail()
-                              }}>
+      {this.props.show && <i className="material-icons grid-action-icon"
+                             key={this.props.key}
+                             onClick={() => this.props.offDetail()}>
         keyboard_arrow_up
       </i>}
     </Column>

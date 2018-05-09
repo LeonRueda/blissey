@@ -1,4 +1,9 @@
 import Component from './AssignShiftToServiceComponent'
 import {connect} from 'react-redux'
+import {pathOr} from "ramda";
 
-export default connect()(Component)
+const mapStateToProps = state => ({
+  shiftsAssignments: pathOr([], ['shiftAssignment', 'collection'], state)
+})
+
+export default connect(mapStateToProps)(Component)
