@@ -30,6 +30,14 @@ nav.app-navigation {
   width: 100%;
   @media (min-width: 992px) {
     margin-right: 0;
+    width: 520px;
+  }
+}
+
+.container-fluid.model-table-container {
+  width: 100%;
+  @media (min-width: 992px) {
+    margin-right: 0;
     width: 500px;
   }
 }

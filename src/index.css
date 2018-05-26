@@ -40,6 +40,13 @@ nav.app-navigation {
   @media (min-width: 992px) {
     .container-fluid.new-model-container {
       margin-right: 0;
+      width: 520px; } }
+
+.container-fluid.model-table-container {
+  width: 100%; }
+  @media (min-width: 992px) {
+    .container-fluid.model-table-container {
+      margin-right: 0;
       width: 500px; } }
 
 .hide {

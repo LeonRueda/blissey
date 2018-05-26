@@ -24,7 +24,7 @@ class API {
       url: `${API_URL[this.actualModel]}/${data.id}`,
       crossDomain: true,
       withCredentials: true,
-      method: 'POST',
+      method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
       hasContent: true,
       body: data

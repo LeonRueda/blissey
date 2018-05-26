@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
+import {Subject} from "rxjs/Rx";
+import {isEmpty} from "ramda";
+
 import Grid from '../grid'
 import NewModelForm from '../model'
 import CrudHeader from './CrudHeaderContainer'
-import CrudCommands from "../../service/shortcut/crud-command.service";
-import {Subject} from "rxjs/Rx";
-import {isEmpty} from "ramda";
 import ActionBuilder from '../../redux/action-creators'
+
+import CrudCommands from "../../service/shortcut/crud-command.service";
 
 class Crud extends Component {
   command$ = new Subject()
@@ -42,11 +44,24 @@ class Crud extends Component {
     })
   }
 
+  getGrid () {
+    return <Grid collection={this.props.collection} model={this.props.model}/>
+  }
+
+  getNewModelFormComponent () {
+    return <NewModelForm model={this.props.model} dispatch={this.props.dispatch} hideForm={() => this.hideNewModel()}/>
+  }
+
+  getComponents () {
+    if ( isEmpty(this.props.newModelState) ) return this.getGrid()
+    return this.getNewModelFormComponent()
+  }
+
   render () {
     return (
       <div>
         <CrudHeader name={this.props.model.name} quantity={this.props.collection.length} showNewModel={() => this.showNewModel()} />
-        { isEmpty(this.props.newModelState) ? <Grid collection={this.props.collection} model={this.props.model}/> : <NewModelForm model={this.props.model} dispatch={this.props.dispatch} hideForm={() => this.hideNewModel()}/> }
+        { this.getComponents() }
       </div>
     )
   }
