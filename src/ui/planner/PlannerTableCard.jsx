@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import moment from "moment";
 import daysOfweek from '../../constants/DaysOfTheWeek'
+import {getUserAvailableHours} from '../../service/user/user-service'
 import {
   path,
   map,
@@ -15,7 +16,7 @@ import {
   propOr,
   times,
   find,
-  propEq
+  propEq, mapObjIndexed, reduce, max
 } from "ramda";
 
 class PlannerTableCard extends Component {
@@ -30,17 +31,40 @@ class PlannerTableCard extends Component {
     return endDate.diff(startDate, 'd') + 1
   }
 
-  getShifts () {
+  getAssignments () {
     const serviceIds = map(prop('id'), pathOr([], ['services'], this.props.newModelState))
-    const assignments = map(prop('assignment'), filter(
+    return map(prop('assignment'), filter(
       a => any(contains(a.serviceId), serviceIds), pathOr([], ['collections', 'shiftAssignment'], this.props)
     ))
+  }
+
+  getShifts () {
+    const assignments = this.getAssignments()
     const days = getDates(propOr({}, ['timeLapse'], this.props.newModelState), this.getDiffDays())
     return sum(flatten(map(day => map(a => values(propOr({}, day)(a)), assignments), days)))
   }
 
   getHours () {
     return this.getShifts() * 12
+  }
+
+  getMinNurses () {
+    const assignments = this.getAssignments()
+    const shiftsByDay = values(mapObjIndexed((day, algo)  => {
+      return {
+        day: day.name,
+        shifts: reduce((acc, shifts) => ({
+          day: acc.day + Number(propOr(0, 'day', shifts)),
+          night: acc.night + Number(propOr(0, 'night', shifts)),
+        }), {day: 0, night: 0}, map(prop(day.name), assignments))
+      }
+    }, daysOfweek))
+    return reduce((acc, {shifts}) => max(acc, max(shifts.day, shifts.night)), 0, shiftsByDay)
+  }
+
+  getAvailableHours () {
+    const users = map(getUserAvailableHours(this.getDiffDays()),pathOr([], ['nurses'], this.props.newModelState))
+    return Math.ceil(sum(users))
   }
 
   render () {
@@ -53,7 +77,15 @@ class PlannerTableCard extends Component {
           Shifts: {this.getShifts()}
         </div>
         <div className="col">
-          Hours: {this.getHours()}
+          Min Nurses: {this.getMinNurses()}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          Required Hours: {this.getHours()}
+        </div>
+        <div className="col">
+          Available Hours: {this.getAvailableHours()}
         </div>
       </div>
     </div>
@@ -63,7 +95,7 @@ class PlannerTableCard extends Component {
 const getDates = (timeLapse, days)=> {
   const startDate = moment(timeLapse.startDate)
 
-  return times(i => prop('name')(find(propEq('index', moment(startDate.add(1, 'd')).day()), daysOfweek)), days)
+  return times(i => prop('name')(find(propEq('index', moment(startDate.add(i > 0 ? 1 : i, 'd')).day()), daysOfweek)), days)
 }
 
 export default PlannerTableCard

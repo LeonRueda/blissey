@@ -70,7 +70,8 @@ class NewModelFormComponent extends Component {
   }
 
   getTimeLapse (attribute) {
-    return <TimeLapse onSelect={val => this.updateAttribute({attribute: attribute.name, value: val})}/>
+    return <TimeLapse onSelect={val => this.updateAttribute({attribute: attribute.name, value: val})}
+                      value={pathOr({}, ['newModel', attribute.name], this.props)}/>
   }
 
   getModelTableComponent () {

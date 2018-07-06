@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {defaultTo, pathOr} from "ramda";
+import {defaultTo, path, pathOr} from "ramda";
 import Picker from 'react-datepicker'
 import moment from "moment";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -9,8 +9,8 @@ class TimeLapseComponent extends Component{
     super( props )
     this.state = {
       value: {
-        startDate: moment(),
-        endDate: moment()
+        startDate: moment(path(['value', 'startDate'], props)),
+        endDate: moment(path(['value', 'endDate'], props))
       }
     }
   }
