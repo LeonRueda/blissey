@@ -202,3 +202,57 @@ nav.app-navigation {
     }
   }
 }
+
+//==========================================================//
+// Roster
+//==========================================================//
+
+.roster {
+  display: grid;
+
+  .calendar-item {
+    border-top: 0.5px solid #cbcbcb;
+    border-left: 0.5px solid #cbcbcb;
+
+    .date {
+      width: 20%;
+    }
+  }
+
+
+  .monday {
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+
+  .tuesday {
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+
+  .wednesday {
+    grid-column-start: 3;
+    grid-column-end: 4;
+  }
+
+  .thursday {
+    grid-column-start: 4;
+    grid-column-end: 5;
+  }
+
+  .friday {
+    grid-column-start: 5;
+    grid-column-end: 6;
+  }
+
+  .saturday {
+    grid-column-start: 6;
+    grid-column-end: 7;
+  }
+
+  .sunday {
+    grid-column-start: 7;
+    grid-column-end: 8;
+  }
+}
+

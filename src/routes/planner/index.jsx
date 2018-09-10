@@ -1,5 +1,7 @@
 import React from 'react'
 import PlannerMainComponent from "../../views/partials/planner/PlannerMainComponent";
+import PlannerVisualizationComponent from "../../views/partials/planner/PlannerVisualizationComponent";
 
 
-export default () => <PlannerMainComponent />
+export const Planner = () => <PlannerMainComponent />
+export const PlannerVisualization = props => <PlannerVisualizationComponent {...props}/>

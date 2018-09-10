@@ -6,7 +6,7 @@ import ShiftGridCard from '../shift/ShiftGridCard'
 import BuildingGridCard from '../building/BuildingGridCard'
 import UserGridCard from '../user/UserGridCard'
 import TimeLapseGridCard from '../time-lapse/TimeLapseGridCard'
-import {EditGridCard, DeleteGridCard} from '../utils'
+import {EditGridCard, DeleteGridCard, UpdateGridCard} from '../utils'
 import BuildingTableCard from '../planner/PlannerTableCardContainer'
 
 
@@ -35,45 +35,50 @@ const modelGridCards = {
   timeLapse: TimeLapseGridCard
 }
 
-const actionsGridCards = {
+const defaultActionsGridCards = {
   edit: EditGridCard,
   delete: DeleteGridCard,
+}
+
+const plannerActionsGridCards = {
+  update: UpdateGridCard,
+  ...defaultActionsGridCards
 }
 
 const gridCards = {
   building: {
     services: modelGridCards.service,
-    ...actionsGridCards,
+    ...defaultActionsGridCards,
   },
   service: {
-    ...actionsGridCards
+    ...defaultActionsGridCards
   },
   title: {
-    ...actionsGridCards
+    ...defaultActionsGridCards
   },
   planner: {
     building: modelGridCards.building,
     nurses: modelGridCards.user,
     services: modelGridCards.service,
     timeLapse: modelGridCards.timeLapse,
-    ...actionsGridCards
+    ...plannerActionsGridCards
   },
   shift: {
     shiftType: modelGridCards.shiftType,
     service: modelGridCards.service,
-    ...actionsGridCards
+    ...defaultActionsGridCards
   },
   shiftType: {
-    ...actionsGridCards
+    ...defaultActionsGridCards
   },
   user: {
     title: modelGridCards.title,
     services: modelGridCards.service,
-    ...actionsGridCards
+    ...defaultActionsGridCards
   },
   assignShiftbyService: {
     shifts: modelGridCards.shift,
-    ...actionsGridCards
+    ...defaultActionsGridCards
   }
 }
 

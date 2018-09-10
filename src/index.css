@@ -205,3 +205,32 @@ nav.app-navigation ul {
       text-align: center;
       color: white;
       line-height: 3em; }
+
+.roster {
+  display: grid; }
+  .roster .calendar-item {
+    border-top: 0.5px solid #cbcbcb;
+    border-left: 0.5px solid #cbcbcb; }
+    .roster .calendar-item .date {
+      width: 20%; }
+  .roster .monday {
+    grid-column-start: 1;
+    grid-column-end: 2; }
+  .roster .tuesday {
+    grid-column-start: 2;
+    grid-column-end: 3; }
+  .roster .wednesday {
+    grid-column-start: 3;
+    grid-column-end: 4; }
+  .roster .thursday {
+    grid-column-start: 4;
+    grid-column-end: 5; }
+  .roster .friday {
+    grid-column-start: 5;
+    grid-column-end: 6; }
+  .roster .saturday {
+    grid-column-start: 6;
+    grid-column-end: 7; }
+  .roster .sunday {
+    grid-column-start: 7;
+    grid-column-end: 8; }

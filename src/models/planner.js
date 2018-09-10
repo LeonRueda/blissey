@@ -1,7 +1,10 @@
 import GeneralModel from './general-model'
-import {contains, intersection, pathOr} from "ramda";
+import {contains, intersection, pathOr, propEq} from "ramda";
+
+const PLANNER = 'planner'
+
 class Planner extends GeneralModel{
-  name = 'planner';
+  name = PLANNER;
   attributes = [
     {name: "id", hide: true},
     {name: "name", label: "Name", type: "string"},
@@ -32,3 +35,5 @@ class Planner extends GeneralModel{
 }
 
 export default Planner
+
+export const isPlanner = propEq('name', PLANNER)

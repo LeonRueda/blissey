@@ -2,16 +2,25 @@ import React, {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import GridCards from './GridCards'
 import {addIndex, indexOf, insert, isNil, map, path, pathOr} from 'ramda'
+import {isPlanner} from '../../models/planner'
 
 const isDetailGrid = pathOr(false, ['gridProperties', 'detail'])
 const isActionableGrid = pathOr(true, ['gridProperties', 'actions'])
 const showDetail = pathOr(false, ['detail', 'show'])
 
+const defaultActions = [
+  {name: 'edit', label: 'Edit'},
+  {name: 'delete', label: 'Delete'}
+]
+
+const plannerActions = [
+  {name: 'update', label: 'Update'},
+  ...defaultActions
+]
+
 const getActionItems = (model) => {
-  return [
-    {name: 'edit', label: 'Edit'},
-    {name: 'delete', label: 'Delete'}
-  ]
+  if (isPlanner(model)) return plannerActions
+  return defaultActions
 }
 
 class Grid extends Component {
