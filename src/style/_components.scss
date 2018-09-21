@@ -220,6 +220,7 @@ nav.app-navigation {
   }
 
 
+  // TODO @Leon: generate the days classes with the index of the weekdays and with a for loop
   .monday {
     grid-column-start: 1;
     grid-column-end: 2;
@@ -256,3 +257,27 @@ nav.app-navigation {
   }
 }
 
+.nurse-roster {
+  display: grid;
+  .nurse {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    white-space: nowrap;
+    padding: 1rem;
+  }
+  .daily-assignation {
+    padding: 7px;
+    background-color: darkgrey;
+  }
+  @for $i from 1 through 31{
+    .date-#{$i} {
+      //grid-column-start: #{ $i + 4 };
+      //grid-column-end: #{ $i + 5 };
+      grid-column: span 1;
+      border: 0.5px solid #cbcbcb;
+    }
+  }
+  .subtotal {
+    grid-column: 36 / span 1;
+  }
+}

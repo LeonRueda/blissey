@@ -9,6 +9,13 @@ const shiftAssignment = new ShiftAssignment()
 
 export const fetchShiftsAssignment = fetchModel(shiftAssignment)
 
+export const persistShiftAssignment = action$ => action$
+  .ofType('SET_ASSIGN_TO_SERVICE')
+  .map(({serviceId}) => ({
+    type: 'PERSIST_ASSIGN_TO_SERVICE',
+    serviceId
+  }))
+
 export const saveShiftAssignment = (action$, store) =>
   action$
     .ofType('PERSIST_ASSIGN_TO_SERVICE')

@@ -28,7 +28,10 @@ class ShiftAssignComponent extends Component{
 
   render () {
     return !!this.getCollection().length &&
-      <Grid collection={this.getCollection()} model={new AssignShiftbyService()} detailComponent={AssignShiftToServiceComponent}/>
+      <Grid
+        collection={this.getCollection()}
+        model={new AssignShiftbyService()}
+        detailComponent={AssignShiftToServiceComponent} />
   }
 }
 

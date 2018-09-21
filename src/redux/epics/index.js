@@ -1,20 +1,22 @@
-import {newBuilding, fetchBuildings, updateBuilding, deleteBuilding} from './building'
-import {newService, fetchServices, updateService, deleteService} from './service'
-import {newTitle, fetchTitles, updateTitle, deleteTitle} from './title'
-import {newUser, fetchUsers, updateUser, deleteUser} from './user'
-import {newPlanner, fetchPlanners, updatePlanner, deletePlanner} from './planner'
-import {newShiftType, fetchShiftTypes, updateShiftType, deleteShiftType} from './shiftType'
-import {newShift, fetchShifts, updateShift, deleteShift} from './shift'
-import {saveShiftAssignment, fetchShiftsAssignment} from './shiftAssignment'
+import {deleteBuilding, fetchBuildings, newBuilding, updateBuilding} from './building'
+import {deleteService, fetchServices, newService, updateService} from './service'
+import {deleteTitle, fetchTitles, newTitle, updateTitle} from './title'
+import {deleteUser, fetchUsers, newUser, updateUser} from './user'
+import {deletePlanner, fetchPlanners, newPlanner, updatePlanner} from './planner'
+import {deleteShiftType, fetchShiftTypes, newShiftType, updateShiftType} from './shiftType'
+import {deleteShift, fetchPlannerShifts, fetchShifts, newShift, updateShift} from './shift'
+import {fetchShiftsAssignment, persistShiftAssignment, saveShiftAssignment} from './shiftAssignment'
 
-import { combineEpics } from 'redux-observable';
+import {combineEpics} from 'redux-observable';
 
 export default combineEpics(
   fetchShiftsAssignment,
   saveShiftAssignment,
+  persistShiftAssignment,
 
   newShift,
   fetchShifts,
+  fetchPlannerShifts,
   updateShift,
   deleteShift,
 

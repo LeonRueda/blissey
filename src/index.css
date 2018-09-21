@@ -18,7 +18,8 @@ main {
   font-family: florencesans, sans-serif;
   margin-top: 48px;
   width: 92%;
-  float: left; }
+  float: left;
+  overflow-y: scroll; }
   @media (min-width: 992px) {
     main {
       max-width: 66%; } }
@@ -234,3 +235,109 @@ nav.app-navigation ul {
   .roster .sunday {
     grid-column-start: 7;
     grid-column-end: 8; }
+
+.nurse-roster {
+  display: grid; }
+  .nurse-roster .nurse {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    white-space: nowrap;
+    padding: 1rem; }
+  .nurse-roster .daily-assignation {
+    padding: 7px;
+    background-color: darkgrey; }
+  .nurse-roster .date-1 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-2 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-3 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-4 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-5 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-6 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-7 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-8 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-9 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-10 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-11 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-12 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-13 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-14 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-15 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-16 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-17 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-18 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-19 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-20 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-21 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-22 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-23 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-24 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-25 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-26 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-27 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-28 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-29 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-30 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-31 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .subtotal {
+    grid-column: 36 / span 1; }

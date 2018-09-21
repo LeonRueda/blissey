@@ -6,7 +6,7 @@ import 'rxjs/add/operator/mapTo'
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/delay'
 
-const getDetails = propOr('server error', 'details')
+export const getDetails = propOr('server error', 'details')
 const getModelId = path(['model', 'id'])
 
 const dispatchErrorAction = model => error => {

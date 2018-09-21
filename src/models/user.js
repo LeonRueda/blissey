@@ -1,4 +1,5 @@
 import GeneralModel from './general-model'
+import {find, propEq} from 'ramda'
 
 class User extends GeneralModel {
   name = 'user'
@@ -18,3 +19,5 @@ class User extends GeneralModel {
 }
 
 export default User
+
+export const getNurseInfo = (nurses, nurseId) => find(propEq('id', nurseId), nurses)

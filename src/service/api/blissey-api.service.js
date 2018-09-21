@@ -31,9 +31,10 @@ class API {
     })
   }
 
-  get () {
+  get (path = '') {
     return ajax({
-      url: API_URL[this.actualModel],
+      url: API_URL[this.actualModel] + path
+      ,
       crossDomain: true,
       withCredentials: true,
       method: 'GET',
