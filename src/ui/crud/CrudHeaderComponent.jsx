@@ -13,9 +13,9 @@ export default (props) => (
         <div className="col-md-3">
 
         </div>
-        <div className="col-md-3">
+        {props.showNewModel && <div className="col-md-3">
           {isEmpty(props.newModelState) && <ButtonNew type={'medium'} classes={'pull-right'} onClick={props.showNewModel}>New </ButtonNew>}
-        </div>
+        </div>}
       </div>
     </div>
   </header>

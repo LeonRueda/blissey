@@ -121,7 +121,7 @@ export default Grid
 
 export const Row = props => <div className={`row ${ props.classes || '' }`}>{props.children}</div>
 
-export const Column = props => <div className={`col ${ props.classes || ''}`}>{props.children}</div>
+export const Column = props => <div className={`col ${ props.classes || ''}`} {...props}>{props.children}</div>
 
 export const GridHeader = props => <div  className={`row grid-header ${ props.classes || '' }`}>{props.children}</div>
 

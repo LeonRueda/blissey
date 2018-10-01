@@ -246,6 +246,9 @@ nav.app-navigation ul {
   .nurse-roster .daily-assignation {
     padding: 7px;
     background-color: darkgrey; }
+  .nurse-roster .daily-assignation.week-total {
+    padding: 7px;
+    background-color: lightgray; }
   .nurse-roster .date-1 {
     grid-column: span 1;
     border: 0.5px solid #cbcbcb; }
@@ -339,5 +342,14 @@ nav.app-navigation ul {
   .nurse-roster .date-31 {
     grid-column: span 1;
     border: 0.5px solid #cbcbcb; }
+  .nurse-roster .grid-header.nurse {
+    padding: 0.7rem 1rem;
+    text-align: left; }
+  .nurse-roster .grid-header .date {
+    grid-column: span 1; }
+  .nurse-roster .nurse-balance {
+    grid-column: 41 / span 1; }
   .nurse-roster .subtotal {
-    grid-column: 36 / span 1; }
+    grid-column: 42 / span 1; }
+  .nurse-roster .total {
+    grid-column: 43 / span 1; }

@@ -24,7 +24,6 @@ class CalendarRosterContainer extends Component{
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  console.log(ownProps)
   return ({
     loadShiftsByPlanner: () => dispatch(loadShiftsByPlanner(ownProps.plannerId)),
     loadUsers: () => dispatch(loadUsers()),
