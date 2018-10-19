@@ -1,0 +1,16 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+GET http://localhost:1337/shiftAssignment
+Cookie: sails.sid=s%3AURhy4WM91NmJzaa-CjrDQD5jIPbmuCNR.1geqGEgLb2U%2B6isYydVnMk8KsMmsadr%2FtwZNOYCcbBM
+
+
+
+###
+DELETE http://localhost:1337/shiftAssignment/5bb03f71d143570e632089dc
+Cookie: sails.sid=s%3AURhy4WM91NmJzaa-CjrDQD5jIPbmuCNR.1geqGEgLb2U%2B6isYydVnMk8KsMmsadr%2FtwZNOYCcbBM
+
+###

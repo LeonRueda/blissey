@@ -1,1 +1,1 @@
-export {default} from './StandarButtonComponent'
+export {default, ButtonNew} from './StandarButtonComponent'

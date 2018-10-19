@@ -1,1 +1,1 @@
-export {default} from './CrudComponent'
+export {default} from './CrudContainer'

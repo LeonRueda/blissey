@@ -1,1 +1,1 @@
-export {default} from './NewModelFormComponent'
+export {default} from './NewModelFormContainer'

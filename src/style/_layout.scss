@@ -1,3 +1,26 @@
+/// Layout Component First
+
+//App main section
+main {
+  font-family: florencesans, sans-serif;
+  margin-top: 48px;
+  width: 92%;
+  float: left;
+  overflow-y: scroll;
+  @media (min-width: 992px) {
+    max-width: 66%;
+  }
+}
+
+nav.app-navigation {
+  font-family: florencesans, sans-serif;
+  margin-top: 48px;
+  max-width: 8%;
+  float: right;
+  @media (min-width: 992px) {
+    max-width: 34%;
+  }
+}
 
 .row+.row {
   margin-top: 1rem;
@@ -8,10 +31,28 @@
   width: 100%;
   @media (min-width: 992px) {
     margin-right: 0;
+    width: 520px;
+  }
+}
+
+.container-fluid.model-table-container {
+  width: 100%;
+  @media (min-width: 992px) {
+    margin-right: 0;
     width: 500px;
   }
 }
 
 .hide {
   display: none;
+}
+
+
+// Fonts
+
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: florencesans, sans-serif;
 }

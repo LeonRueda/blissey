@@ -2,19 +2,6 @@
 
 
 // inputs
-
-input.np-input:focus {
-  border: none;
-  border-bottom: 1px solid $base;
-  outline: none;
-}
-
-input.np-input.input-medium {
-  width: 10rem;
-  height: 1.8rem;
-  margin: 0px 1rem;
-}
-
 input.np-input {
   &.text-input {
     width: 90%;
@@ -35,5 +22,282 @@ input.np-input {
   border: none;
   color: black;
   transition: all 200ms;
+
+  &:focus {
+    border: none;
+    border-bottom: 1px solid $base;
+    outline: none;
+  }
+
+  &.input-medium {
+    width: 10rem;
+    height: 1.8rem;
+    margin: 0px 1rem;
+
+  }
+}
+
+// Buttons Styles
+button {
+  &.np-button {
+    width: 90%;
+    height: 2rem;
+    margin: 0px 5%;
+    border: none;
+    border-radius: 2px;
+    font-family: florsans-bold;
+    box-shadow: $BS-first-level;
+    &.input-medium {
+      width: 10rem;
+      height: 2rem;
+      margin: 0px 1rem;
+    }
+  }
+  &.submit {
+    background-color: $base;
+    color: white;
+  }
+  &.new {
+    background-color: $base900;
+    color: white;
+  }
+}
+
+//Select Component
+div.select {
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li.select-option {
+    padding: 1rem;
+    background-color: white;
+    &.selected {
+      background-color: $base50;
+    }
+    &:hover {
+      background-color: $base50;
+    }
+  }
+  .selected {
+    margin: 0 5%;
+    .selected-option {
+      padding: 5px;
+      margin-right: 5px;
+      float: left;
+      display: inline-block;
+      background-color: #b1eef7;
+      border: 1px solid #bbb;
+      border-radius: 2px;
+      font-size: 0.75rem;
+      .delete {
+        cursor: pointer;
+        &:hover {
+          text-shadow: 1px 1px #999999;
+        }
+      }
+    }
+  }
+}
+
+//App main header
+header.app-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 600;
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: saturate($base, 5%);
+    box-shadow: $BS-first-level;
+    li {
+      float: left;
+      a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: all 1000ms;
+        &:hover {
+          background-color: $baseHover;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+// Grid Action Icons
+i.grid-action-icon {
+  width: 2rem;
+  cursor: pointer
+}
+
+div.main-app-notification {
+  margin-top: 48px;
+}
+
+
+header.crud-header {
+  background-color: #E0F7FA;
+  width: 100%;
+  height: 5rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  span.section-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
+}
+
+div.grid-header {
+  background-color: #E0F7FA;
+  .column-header {
+    font-size: 0.8em;
+    color: gray
+  }
+}
+
+header.np-crud-header:hover {
+  //height: 5rem;
+}
+
+
+//==========================================================//
+// App Navigation
+//==========================================================//
+
+nav.app-navigation {
+  ul {
+    width: 100%;
+    margin: 10px 0;
+    padding: 0;
+    li {
+      float: right;
+      width: 100%;
+      display: block;
+      background: $base900;
+      margin-bottom: 0.5rem;
+      box-shadow: $BS-first-level;
+      transition: margin-bottom 0ms, width 150ms, height 150ms, box-shadow 150ms;
+      &:hover {
+        box-shadow: $BS-second-level;
+        width: 100.5%;
+        height: 3.2rem;
+        margin-bottom: 0.3rem;
+      }
+      a {
+        display: block;
+        width: 100%;
+        height: 3rem;
+        text-decoration: none;
+        text-align: center;
+        color: white;
+        line-height: 3em;
+      }
+    }
+  }
+}
+
+//==========================================================//
+// Roster
+//==========================================================//
+
+.roster {
+  display: grid;
+
+  .calendar-item {
+    border-top: 0.5px solid #cbcbcb;
+    border-left: 0.5px solid #cbcbcb;
+
+    .date {
+      width: 20%;
+    }
+  }
+
+
+  // TODO @Leon: generate the days classes with the index of the weekdays and with a for loop
+  .monday {
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+
+  .tuesday {
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+
+  .wednesday {
+    grid-column-start: 3;
+    grid-column-end: 4;
+  }
+
+  .thursday {
+    grid-column-start: 4;
+    grid-column-end: 5;
+  }
+
+  .friday {
+    grid-column-start: 5;
+    grid-column-end: 6;
+  }
+
+  .saturday {
+    grid-column-start: 6;
+    grid-column-end: 7;
+  }
+
+  .sunday {
+    grid-column-start: 7;
+    grid-column-end: 8;
+  }
+}
+
+.nurse-roster {
+  display: grid;
+  .nurse {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    white-space: nowrap;
+    padding: 1rem;
+  }
+  .daily-assignation {
+    padding: 7px;
+    background-color: darkgrey;
+  }
+  .daily-assignation.week-total {
+    padding: 7px;
+    background-color: lightgray;
+  }
+  @for $i from 1 through 31{
+    .date-#{$i} {
+      //grid-column-start: #{ $i + 4 };
+      //grid-column-end: #{ $i + 5 };
+      grid-column: span 1;
+      border: 0.5px solid #cbcbcb;
+    }
+  }
+  .grid-header {
+    &.nurse {
+      padding: 0.7rem 1rem;
+      text-align: left;
+    }
+    .date {
+      grid-column: span 1;
+    }
+  }
+  .nurse-balance {
+    grid-column: 41 / span 1;
+  }
+  .subtotal {
+    grid-column: 42 / span 1;
+  }
+  .total {
+    grid-column: 43 / span 1;
+  }
 }
 

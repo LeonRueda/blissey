@@ -1,0 +1,355 @@
+@font-face {
+  font-family: 'geosans-light';
+  src: url("http://localhost:1337/fonts/GeosansLight.ttf"); }
+
+@font-face {
+  font-family: 'florsans-tall';
+  src: url("http://localhost:1337/fonts/Florsn09.ttf"); }
+
+@font-face {
+  font-family: 'florencesans';
+  src: url("http://localhost:1337/fonts/Florsn01.ttf"); }
+
+@font-face {
+  font-family: 'florsans-bold';
+  src: url("http://localhost:1337/fonts/Florsn33.ttf"); }
+
+main {
+  font-family: florencesans, sans-serif;
+  margin-top: 48px;
+  width: 92%;
+  float: left;
+  overflow-y: scroll; }
+  @media (min-width: 992px) {
+    main {
+      max-width: 66%; } }
+
+nav.app-navigation {
+  font-family: florencesans, sans-serif;
+  margin-top: 48px;
+  max-width: 8%;
+  float: right; }
+  @media (min-width: 992px) {
+    nav.app-navigation {
+      max-width: 34%; } }
+
+.row + .row {
+  margin-top: 1rem; }
+
+.container-fluid.new-model-container {
+  width: 100%; }
+  @media (min-width: 992px) {
+    .container-fluid.new-model-container {
+      margin-right: 0;
+      width: 520px; } }
+
+.container-fluid.model-table-container {
+  width: 100%; }
+  @media (min-width: 992px) {
+    .container-fluid.model-table-container {
+      margin-right: 0;
+      width: 500px; } }
+
+.hide {
+  display: none; }
+
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: florencesans, sans-serif; }
+
+input.np-input {
+  margin: 0px 5%;
+  background-color: inherit;
+  border: none;
+  color: black;
+  transition: all 200ms; }
+  input.np-input.text-input {
+    width: 90%;
+    height: 2rem;
+    border-bottom: 1px solid black;
+    text-align: center;
+    font-family: florsans-bold; }
+  input.np-input.checkbox-input {
+    height: 2rem;
+    width: 1rem;
+    vertical-align: middle; }
+  input.np-input:focus {
+    border: none;
+    border-bottom: 1px solid #65B5CA;
+    outline: none; }
+  input.np-input.input-medium {
+    width: 10rem;
+    height: 1.8rem;
+    margin: 0px 1rem; }
+
+button.np-button {
+  width: 90%;
+  height: 2rem;
+  margin: 0px 5%;
+  border: none;
+  border-radius: 2px;
+  font-family: florsans-bold;
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5); }
+  button.np-button.input-medium {
+    width: 10rem;
+    height: 2rem;
+    margin: 0px 1rem; }
+
+button.submit {
+  background-color: #65B5CA;
+  color: white; }
+
+button.new {
+  background-color: #006064;
+  color: white; }
+
+div.select ul {
+  list-style-type: none;
+  padding: 0; }
+
+div.select li.select-option {
+  padding: 1rem;
+  background-color: white; }
+  div.select li.select-option.selected {
+    background-color: #E0F7FA; }
+  div.select li.select-option:hover {
+    background-color: #E0F7FA; }
+
+div.select .selected {
+  margin: 0 5%; }
+  div.select .selected .selected-option {
+    padding: 5px;
+    margin-right: 5px;
+    float: left;
+    display: inline-block;
+    background-color: #b1eef7;
+    border: 1px solid #bbb;
+    border-radius: 2px;
+    font-size: 0.75rem; }
+    div.select .selected .selected-option .delete {
+      cursor: pointer; }
+      div.select .selected .selected-option .delete:hover {
+        text-shadow: 1px 1px #999999; }
+
+header.app-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 600; }
+  header.app-header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #60b8cf;
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5); }
+    header.app-header nav ul li {
+      float: left; }
+      header.app-header nav ul li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: all 1000ms; }
+        header.app-header nav ul li a:hover {
+          background-color: #F8F8FF;
+          text-decoration: none; }
+
+i.grid-action-icon {
+  width: 2rem;
+  cursor: pointer; }
+
+div.main-app-notification {
+  margin-top: 48px; }
+
+header.crud-header {
+  background-color: #E0F7FA;
+  width: 100%;
+  height: 5rem;
+  padding: 1rem;
+  box-sizing: border-box; }
+  header.crud-header span.section-title {
+    font-size: 1.5rem;
+    font-weight: 900; }
+
+div.grid-header {
+  background-color: #E0F7FA; }
+  div.grid-header .column-header {
+    font-size: 0.8em;
+    color: gray; }
+
+nav.app-navigation ul {
+  width: 100%;
+  margin: 10px 0;
+  padding: 0; }
+  nav.app-navigation ul li {
+    float: right;
+    width: 100%;
+    display: block;
+    background: #006064;
+    margin-bottom: 0.5rem;
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
+    transition: margin-bottom 0ms, width 150ms, height 150ms, box-shadow 150ms; }
+    nav.app-navigation ul li:hover {
+      box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+      width: 100.5%;
+      height: 3.2rem;
+      margin-bottom: 0.3rem; }
+    nav.app-navigation ul li a {
+      display: block;
+      width: 100%;
+      height: 3rem;
+      text-decoration: none;
+      text-align: center;
+      color: white;
+      line-height: 3em; }
+
+.roster {
+  display: grid; }
+  .roster .calendar-item {
+    border-top: 0.5px solid #cbcbcb;
+    border-left: 0.5px solid #cbcbcb; }
+    .roster .calendar-item .date {
+      width: 20%; }
+  .roster .monday {
+    grid-column-start: 1;
+    grid-column-end: 2; }
+  .roster .tuesday {
+    grid-column-start: 2;
+    grid-column-end: 3; }
+  .roster .wednesday {
+    grid-column-start: 3;
+    grid-column-end: 4; }
+  .roster .thursday {
+    grid-column-start: 4;
+    grid-column-end: 5; }
+  .roster .friday {
+    grid-column-start: 5;
+    grid-column-end: 6; }
+  .roster .saturday {
+    grid-column-start: 6;
+    grid-column-end: 7; }
+  .roster .sunday {
+    grid-column-start: 7;
+    grid-column-end: 8; }
+
+.nurse-roster {
+  display: grid; }
+  .nurse-roster .nurse {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    white-space: nowrap;
+    padding: 1rem; }
+  .nurse-roster .daily-assignation {
+    padding: 7px;
+    background-color: darkgrey; }
+  .nurse-roster .daily-assignation.week-total {
+    padding: 7px;
+    background-color: lightgray; }
+  .nurse-roster .date-1 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-2 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-3 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-4 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-5 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-6 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-7 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-8 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-9 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-10 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-11 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-12 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-13 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-14 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-15 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-16 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-17 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-18 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-19 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-20 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-21 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-22 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-23 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-24 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-25 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-26 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-27 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-28 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-29 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-30 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .date-31 {
+    grid-column: span 1;
+    border: 0.5px solid #cbcbcb; }
+  .nurse-roster .grid-header.nurse {
+    padding: 0.7rem 1rem;
+    text-align: left; }
+  .nurse-roster .grid-header .date {
+    grid-column: span 1; }
+  .nurse-roster .nurse-balance {
+    grid-column: 41 / span 1; }
+  .nurse-roster .subtotal {
+    grid-column: 42 / span 1; }
+  .nurse-roster .total {
+    grid-column: 43 / span 1; }

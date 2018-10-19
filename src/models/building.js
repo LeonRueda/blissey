@@ -1,16 +1,15 @@
-export default class Building {
+import GeneralModel from './general-model'
+class Building extends GeneralModel{
   name = 'building';
   attributes = [
     {name: "id", hide: true},
     {name: "name", label: "Name", type: "string"},
-    {name: "services", label: "Services", type: "autocomplete", params: {base: "service"}}
+    {name: "services", label: "Services", type: "multiselect", params: {base: "service"}}
   ];
 
   constructor () {
-    this.collection = [
-      {id: 1, name: "Ed. Princilpal", label: "ed principal"},
-      {id: 2, name: "Ed. Secundario", label: "ed secundario"},
-      {id: 3, name: "Ed. Terciario", label: "ed terciario"}
-    ]
+    super()
   }
 }
+
+export default Building
