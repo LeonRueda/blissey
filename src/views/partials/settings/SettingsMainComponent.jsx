@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Crud from '../../../ui/crud'
 import {Title} from '../../../models'
-import {ShiftType} from '../../../models'
+import {ShiftType, Period} from '../../../models'
 
 export default class SettingsMainComponent extends Component {
 
@@ -9,6 +9,7 @@ export default class SettingsMainComponent extends Component {
     return <main className='page-main-content'>
       <Crud model={new Title()}/>
       <Crud model={new ShiftType()}/>
+      <Crud model={new Period()}/>
     </main>
   }
 }

@@ -56,8 +56,15 @@ const gridCards = {
   title: {
     ...defaultActionsGridCards
   },
+  period: {
+    ...defaultActionsGridCards
+  },
+  planning: {
+    ...defaultActionsGridCards
+  },
   planner: {
     building: modelGridCards.building,
+    nurseType: modelGridCards.title,
     nurses: modelGridCards.user,
     services: modelGridCards.service,
     timeLapse: modelGridCards.timeLapse,

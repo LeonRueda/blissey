@@ -1,5 +1,5 @@
 import GeneralModel from './general-model'
-import {contains, intersection, pathOr, propEq} from "ramda";
+import {contains, intersection, pathOr, propEq, propOr, where} from "ramda";
 
 const PLANNER = 'planner'
 
@@ -17,11 +17,15 @@ class Planner extends GeneralModel{
       filterByState: state => pathOr([], ['building', 'services'], state)
       }
     },
+    {name: 'nurseType', label: 'Title', type: 'autocomplete', params: { base: 'title' }},
     {name: 'nurses', label: 'Nurses', type: 'multiselect',
       params: {
         base: 'user',
-        filter: services => user => intersection(user.services, services).length > 0,
-        filterByState: state => pathOr([], ['services'], state)
+        filter: filterUserByTitleAndService,
+        filterByState: state => ({
+          services: pathOr([], ['services'], state),
+          title: propOr({}, 'nurseType', state)
+        })
       }
     }
   ];
@@ -32,6 +36,14 @@ class Planner extends GeneralModel{
   constructor () {
     super()
   }
+}
+
+const filterUserByTitleAndService = ({services: stateServices, title: stateTitle}) => {
+  console.log(stateTitle, stateServices)
+  return where({
+    services: services => intersection(services, stateServices).length > 0,
+    title: propEq('name', stateTitle.name)
+  })
 }
 
 export default Planner
