@@ -3,6 +3,7 @@ import {AssignShiftbyService} from '../../../models'
 import Grid from "../../../ui/grid/GridComponent";
 import AssignShiftToServiceComponent from './AssignShiftToServiceContainer'
 import {map, propEq, find, values, propOr, defaultTo} from 'ramda'
+import CrudHeader from '../../../ui/crud/CrudHeaderContainer'
 
 
 
@@ -28,10 +29,13 @@ class ShiftAssignComponent extends Component{
 
   render () {
     return !!this.getCollection().length &&
-      <Grid
-        collection={this.getCollection()}
-        model={new AssignShiftbyService()}
-        detailComponent={AssignShiftToServiceComponent} />
+      <div>
+        <CrudHeader name={'N/A'} quantity={this.getCollection().length} />
+        <Grid
+          collection={this.getCollection()}
+          model={new AssignShiftbyService()}
+          detailComponent={AssignShiftToServiceComponent} />
+      </div>
   }
 }
 

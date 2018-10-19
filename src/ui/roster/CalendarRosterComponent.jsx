@@ -22,7 +22,6 @@ export class CalendarRosterComponent extends PureComponent {
   getCalendarItems() {
     const assignedShifts = mapAssignedShifts(getPlannerShifts(this.props), this.props.shifts, this.props.shiftTypes, this.props.nurses)
     const shiftByDate = groupBy(prop("date"), assignedShifts)
-    console.log(shiftByDate)
     return values(mapObjIndexed(
       shifts => (
         <div key={shifts.date} className={`calendar-item ${getDay(shifts[0])}`}>
@@ -37,13 +36,13 @@ export class CalendarRosterComponent extends PureComponent {
   render() {
     return (
       <div className={'roster'}>
-        <div className={'monday'}>monday</div>
-        <div className={'tuesday'}>tuesday</div>
-        <div className={'wednesday'}>wednesday</div>
-        <div className={'thursday'}>thursday</div>
-        <div className={'friday'}>friday</div>
-        <div className={'saturday'}>saturday</div>
-        <div className={'sunday'}>sunday</div>
+        <div className={'grid-header monday'}><span className={'column-header'}>monday</span></div>
+        <div className={'grid-header tuesday'}><span className={'column-header'}>tuesday</span></div>
+        <div className={'grid-header wednesday'}><span className={'column-header'}>wednesday</span></div>
+        <div className={'grid-header thursday'}><span className={'column-header'}>thursday</span></div>
+        <div className={'grid-header friday'}><span className={'column-header'}>friday</span></div>
+        <div className={'grid-header saturday'}><span className={'column-header'}>saturday</span></div>
+        <div className={'grid-header sunday'}><span className={'column-header'}>sunday</span></div>
         {
           this.getCalendarItems()
         }

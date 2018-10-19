@@ -20,7 +20,7 @@ export default class LogInMainComponent extends Component {
             </div>
             <div className="row-fluid show-grid-extra-large">
               <input type="password" name="password"  className="np-input text-input" placeholder={ __('Password') }/>
-              <input type="hidden" name="next" value="building"/>
+              <input type="hidden" name="next" value="planning"/>
             </div>
             <div className="row-fluid show-grid-extra-large">
               <button type="submit" className="np-button button-submit" >{__('Sign In')}</button>

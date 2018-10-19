@@ -269,6 +269,10 @@ nav.app-navigation {
     padding: 7px;
     background-color: darkgrey;
   }
+  .daily-assignation.week-total {
+    padding: 7px;
+    background-color: lightgray;
+  }
   @for $i from 1 through 31{
     .date-#{$i} {
       //grid-column-start: #{ $i + 4 };
@@ -277,7 +281,22 @@ nav.app-navigation {
       border: 0.5px solid #cbcbcb;
     }
   }
+  .grid-header {
+    &.nurse {
+      padding: 0.7rem 1rem;
+      text-align: left;
+    }
+    .date {
+      grid-column: span 1;
+    }
+  }
+  .nurse-balance {
+    grid-column: 41 / span 1;
+  }
   .subtotal {
-    grid-column: 36 / span 1;
+    grid-column: 42 / span 1;
+  }
+  .total {
+    grid-column: 43 / span 1;
   }
 }

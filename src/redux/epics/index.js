@@ -1,6 +1,7 @@
 import {deleteBuilding, fetchBuildings, newBuilding, updateBuilding} from './building'
 import {deleteService, fetchServices, newService, updateService} from './service'
 import {deleteTitle, fetchTitles, newTitle, updateTitle} from './title'
+import {deletePeriod, fetchPeriods, newPeriod, updatePeriod} from './period'
 import {deleteUser, fetchUsers, newUser, updateUser} from './user'
 import {deletePlanner, fetchPlanners, newPlanner, updatePlanner} from './planner'
 import {deleteShiftType, fetchShiftTypes, newShiftType, updateShiftType} from './shiftType'
@@ -34,6 +35,11 @@ export default combineEpics(
   fetchTitles,
   updateTitle,
   deleteTitle,
+
+  newPeriod,
+  fetchPeriods,
+  updatePeriod,
+  deletePeriod,
 
   newService,
   fetchServices,

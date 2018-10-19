@@ -29,11 +29,12 @@ export default (state, action) => {
 const setId = (state, index, id) => set(lensPath(['collection', index, 'id']), id, state)
 const setServiceId = (state, index, serviceId) => set(lensPath(['collection', index, 'serviceId']), `${serviceId}`, state)
 
-const setAssignation = (state, index, {day, shiftType, val}) => {
+const setAssignation = (state, index, {day, shiftType, nurseTitle, val}) => {
   return set(lensPath([
     'collection',
     index,
     'assignment',
+    nurseTitle,
     day,
     shiftType
   ]), val, state)

@@ -7,6 +7,8 @@ import shiftType from "./shiftType"
 import shift from "./shift"
 import shiftAssignment from "./shiftAssignment"
 import planner from "./planner"
+import planning from "./planning"
+import period from "./period"
 
 export default combineReducers({
   building,
@@ -16,5 +18,7 @@ export default combineReducers({
   shift,
   shiftType,
   shiftAssignment,
-  planner
+  planner,
+  planning,
+  period
 })
