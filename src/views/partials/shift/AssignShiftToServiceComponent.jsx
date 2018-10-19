@@ -79,5 +79,3 @@ class AssignShiftToServiceComponent extends Component{
 const ShiftTypeNameColumn = shiftType => <Row><Column style={{padding: '5px'}}>{shiftType.name}</Column></Row>
 
 export default AssignShiftToServiceComponent
-
-
