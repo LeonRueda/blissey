@@ -5,17 +5,24 @@ import Notifications from './ui/notification'
 import Header from './ui/app-header'
 import Modal from './ui/modal'
 import Sidebar from "./ui/sidebar";
+import {Router} from 'react-router-dom'
+
+import createBrowserHistory from 'history/createBrowserHistory'
+
+const history = createBrowserHistory()
 
  export class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header />
-        <Notifications />
-        <Routes />
-        <Sidebar />
-        <Modal />
-      </div>
+        <Router history={history}>
+          <div className="App">
+              <Header />
+              <Notifications />
+              <Routes />
+              <Sidebar />
+              <Modal />
+          </div>
+        </Router>
     );
   }
 }
