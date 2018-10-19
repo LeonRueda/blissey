@@ -1,4 +1,4 @@
-import isNil from "ramda/es/isNil";
+import { isNil } from 'ramda';
 
 export default class GeneralModel {
   defaultByType (attribute) {

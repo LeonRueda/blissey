@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {loadShiftsByPlanner} from '../../redux/action-creators/shift'
 import {loadUsers} from '../../redux/action-creators/user'
-import connect from 'react-redux/es/connect/connect'
+import {connect} from 'react-redux'
 import {CalendarRosterComponent} from './CalendarRosterComponent'
 import {getStatePlannerShifts} from '../../selectors/shift'
 import {getStateNurses} from '../../selectors/nurse'
