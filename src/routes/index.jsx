@@ -7,8 +7,10 @@ import Settings from './settings'
 import {Planner, PlannerVisualization}from './planner'
 import Shift from './shift/index'
 import LogIn from './log-in/index'
+import Planning from './planning'
 
 export default () => <Switch>
+    <Route exact path='/planning' component={Planning}/>
     <Route path='/building' component={Building}/>
     <Route path='/service' component={Service}/>
     <Route path='/user' component={User}/>

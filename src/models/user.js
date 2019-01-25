@@ -1,5 +1,5 @@
 import GeneralModel from './general-model'
-import {find, propEq} from 'ramda'
+import {find, intersection, propEq, where} from 'ramda'
 
 class User extends GeneralModel {
   name = 'user'
@@ -21,3 +21,16 @@ class User extends GeneralModel {
 export default User
 
 export const getNurseInfo = (nurses, nurseId) => find(propEq('id', nurseId), nurses)
+
+export const filterUserByTitleAndService = ({services: stateServices, title: stateTitle}) => {
+  return where({
+    services: services => intersection(services, stateServices).length > 0,
+    title: propEq('name', stateTitle.name)
+  })
+}
+
+export const filterByServicePredicate = ({services: stateServices}) => {
+  return where({
+    services: services => intersection(services, stateServices).length > 0
+  })
+}

@@ -1,5 +1,6 @@
 import GeneralModel from './general-model'
-import {contains, intersection, pathOr, propEq, propOr, where} from "ramda";
+import {contains, pathOr, propEq, propOr} from "ramda";
+import {filterUserByTitleAndService} from './user'
 
 const PLANNER = 'planner'
 
@@ -36,14 +37,6 @@ class Planner extends GeneralModel{
   constructor () {
     super()
   }
-}
-
-const filterUserByTitleAndService = ({services: stateServices, title: stateTitle}) => {
-  console.log(stateTitle, stateServices)
-  return where({
-    services: services => intersection(services, stateServices).length > 0,
-    title: propEq('name', stateTitle.name)
-  })
 }
 
 export default Planner

@@ -8,6 +8,7 @@ import UserGridCard from '../user/UserGridCard'
 import TimeLapseGridCard from '../time-lapse/TimeLapseGridCard'
 import {EditGridCard, DeleteGridCard, UpdateGridCard} from '../utils'
 import BuildingTableCard from '../planner/PlannerTableCardContainer'
+import PeriodGridCard from '../period/PeriodGridCard'
 
 
 class GridCards {
@@ -32,7 +33,8 @@ const modelGridCards = {
   shiftType: ShiftTypeGridCard,
   building: BuildingGridCard,
   user: UserGridCard,
-  timeLapse: TimeLapseGridCard
+  timeLapse: TimeLapseGridCard,
+  period: PeriodGridCard
 }
 
 const defaultActionsGridCards = {
@@ -60,6 +62,10 @@ const gridCards = {
     ...defaultActionsGridCards
   },
   planning: {
+    period: modelGridCards.period,
+    building: modelGridCards.building,
+    services: modelGridCards.service,
+    nurses: modelGridCards.user,
     ...defaultActionsGridCards
   },
   planner: {

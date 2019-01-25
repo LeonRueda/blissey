@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import __ from '../../../i18n'
+import {API_URL} from '../../../config/endpoints'
 
 export default class LogInMainComponent extends Component {
 
@@ -14,7 +15,7 @@ export default class LogInMainComponent extends Component {
           <div className="row-fluid">
             <span className="logo-main-name">Planner</span>
           </div>
-          <form method="POST" action="http://localhost:1337/login">
+          <form method="POST" action={API_URL.login}>
             <div className="row-fluid show-grid-extra-large">
               <input type="email" name="email" className="np-input text-input first-field-focus" placeholder={ __('Email or Username') }/>
             </div>

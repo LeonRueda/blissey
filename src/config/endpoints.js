@@ -2,6 +2,7 @@ const root = process.env.NODE_ENV === 'development' ? 'http://localhost:1337' : 
 
 export const API_URL = {
   root: root,
+  login: `${root}/login`,
   building: `${root}/building`,
   service: `${root}/service`,
   title: `${root}/title`,
