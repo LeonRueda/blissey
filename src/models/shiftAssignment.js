@@ -5,11 +5,7 @@ class ShiftAssignment extends GeneralModel{
     {name: "id", hide: true},
     {name: "serviceId", hide: true},
     {name: "assignments", hide: true},
-  ];
-
-  constructor () {
-    super()
-  }
+  ]
 }
 
 export default ShiftAssignment

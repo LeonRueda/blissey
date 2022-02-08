@@ -8,10 +8,6 @@ import {getDefaultNurses} from '../../../models/service'
 const serviceId = path(['model', 'serviceId'])
 
 class AssignShiftToServiceComponent extends Component{
-  constructor (props) {
-    super(props)
-  }
-
   saveModel(day, shiftType, nurseTitle, val) {
     this.props.saveShiftAssignation({
       serviceId: serviceId(this.props),

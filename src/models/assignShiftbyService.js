@@ -11,10 +11,6 @@ class AssignShiftbyService extends GeneralModel{
     detail: true,
     actions: false
   };
-
-  constructor () {
-    super()
-  }
 }
 
 export default AssignShiftbyService

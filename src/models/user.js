@@ -11,11 +11,7 @@ class User extends GeneralModel {
     {name: 'email', label: 'Email', type: 'string'},
     {name: 'password', label: 'Password', type: 'string', hide: true, default: 'demo1234'},
     {name: 'services', label: 'Services', type: 'multiselect', params: {base: 'service'}}
-  ];
-
-  constructor () {
-    super()
-  }
+  ]
 }
 
 export default User

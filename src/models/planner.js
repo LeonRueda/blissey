@@ -3,6 +3,15 @@ import {contains, intersection, pathOr, propEq, propOr, where} from "ramda";
 
 const PLANNER = 'planner'
 
+const filterUserByTitleAndService = ({services: stateServices, title: stateTitle}) => {
+  return where({
+    services: services => intersection(services, stateServices).length > 0,
+    title: propEq('name', stateTitle.name)
+  })
+}
+
+export const isPlanner = propEq('name', PLANNER)
+
 class Planner extends GeneralModel{
   name = PLANNER;
   attributes = [
@@ -32,20 +41,6 @@ class Planner extends GeneralModel{
   gridOptions = {
     showTable: true
   }
-
-  constructor () {
-    super()
-  }
-}
-
-const filterUserByTitleAndService = ({services: stateServices, title: stateTitle}) => {
-  console.log(stateTitle, stateServices)
-  return where({
-    services: services => intersection(services, stateServices).length > 0,
-    title: propEq('name', stateTitle.name)
-  })
 }
 
 export default Planner
-
-export const isPlanner = propEq('name', PLANNER)

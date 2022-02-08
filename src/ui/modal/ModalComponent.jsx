@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
 import {Subject} from 'rxjs'
 import modalService from '../../service/modal'
-import $ from 'jquery'
 import __ from '../../i18n'
-import bootstrap from 'bootstrap'
 
 class ModalComponent extends Component{
   channel$ = new Subject()
@@ -16,11 +14,11 @@ class ModalComponent extends Component{
       message: '',
       actionName: __('Accept')
     }
-    this.modal = $('#general-modal')
+    this.modal = ('#general-modal')
 
     this.channel$
       .subscribe( message => {
-        this.modal = $('#general-modal')
+        this.modal = ('#general-modal')
         this.modal.modal('toggle')
         this.action = message.action
         this.setState({

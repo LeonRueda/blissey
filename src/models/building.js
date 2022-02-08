@@ -6,10 +6,6 @@ class Building extends GeneralModel{
     {name: "name", label: "Name", type: "string"},
     {name: "services", label: "Services", type: "multiselect", params: {base: "service"}}
   ];
-
-  constructor () {
-    super()
-  }
 }
 
 export default Building

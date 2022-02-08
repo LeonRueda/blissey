@@ -6,11 +6,7 @@ class ShiftType extends GeneralModel{
     {name: "name", label: "Name", type: "string"},
     {name: "letterCode", label: "Letter Code", type: "string"},
     {name: "workLoad", label: "Hours", type: "number"}
-  ];
-
-  constructor () {
-    super()
-  }
+  ]
 }
 
 export default ShiftType

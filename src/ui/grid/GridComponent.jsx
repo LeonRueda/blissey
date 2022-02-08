@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import 'bootstrap/dist/css/bootstrap.css'
 import GridCards from './GridCards'
 import {addIndex, indexOf, insert, isNil, map, path, pathOr} from 'ramda'
 import {isPlanner} from '../../models/planner'

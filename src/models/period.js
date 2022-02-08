@@ -8,10 +8,6 @@ class Period extends GeneralModel {
     {name: 'id', hide: true},
     {name: 'name', label: 'Name', type: 'string'},
   ];
-
-  constructor () {
-    super()
-  }
 }
 
 export default Period

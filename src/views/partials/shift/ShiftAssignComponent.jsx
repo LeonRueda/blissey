@@ -8,8 +8,7 @@ import CrudHeader from '../../../ui/crud/CrudHeaderContainer'
 
 
 class ShiftAssignComponent extends Component{
-
-  componentWillMount() {
+  componentDidMount() {
     this.props.dispatch({type: 'LOAD_SHIFTASSIGNMENT_COLLECTION'})
     this.props.dispatch({type: 'LOAD_SERVICE_COLLECTION'})
   }
@@ -40,4 +39,3 @@ class ShiftAssignComponent extends Component{
 }
 
 export default ShiftAssignComponent
-

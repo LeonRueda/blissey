@@ -6,10 +6,6 @@ class Title extends GeneralModel {
     {name: 'id', hide: true},
     {name: 'name', label: 'Name', type: 'string'},
   ];
-
-  constructor () {
-    super()
-  }
 }
 
 export default Title

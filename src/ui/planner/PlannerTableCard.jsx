@@ -20,7 +20,7 @@ import {
 } from "ramda";
 
 class PlannerTableCard extends Component {
-  componentWillMount () {
+  componentDidMount () {
     this.props.dispatch({type: 'LOAD_SHIFTASSIGNMENT_COLLECTION'})
   }
 
@@ -99,6 +99,3 @@ const getDates = (timeLapse, days)=> {
 }
 
 export default PlannerTableCard
-
-
-

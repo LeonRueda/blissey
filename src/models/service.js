@@ -8,11 +8,7 @@ class Service extends GeneralModel {
     {name: 'color', label: 'Color', type: 'string'},
     {name: 'beds', label: 'Beds', type: 'number'},
     {name: 'bedsByNurse', label: 'Beds by Nurse', type: 'number'}
-  ];
-
-  constructor () {
-    super()
-  }
+  ]
 }
 
 export const getDefaultNurses = (service, nurseTitle) => nurseTitle === 'jefe' ? 1 : Math.ceil(service.beds / service.bedsByNurse)

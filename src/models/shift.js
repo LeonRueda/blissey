@@ -1,5 +1,5 @@
 import GeneralModel from './general-model'
-import {find, map, pathOr, propEq, propSatisfies, toLower, values} from 'ramda'
+import {find, map, pathOr, propEq, values} from 'ramda'
 import {getNurseInfo} from './user'
 class Shift extends GeneralModel{
   name = 'shift';
@@ -8,11 +8,7 @@ class Shift extends GeneralModel{
     {name: "date", label: "Date", type: "string"},
     {name: "service", label: "Service", type: 'autocomplete', params: {base: 'service'}},
     {name: "shiftType", label: "Type", type: 'autocomplete', params: {base: 'shiftType'}},
-  ];
-
-  constructor () {
-    super()
-  }
+  ]
 }
 
 export default Shift
